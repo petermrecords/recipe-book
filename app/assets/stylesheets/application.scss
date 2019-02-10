@@ -12,5 +12,11 @@
  *
  */
 
-@import "bootstrap-sprockets";
 @import "bootstrap";
+@import "rails_bootstrap_forms";
+
+// form {
+// 	input.is-invalid {
+// 		border: 1px solid red;
+// 	}
+// }
