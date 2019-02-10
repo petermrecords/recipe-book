@@ -7,6 +7,6 @@
 		<%= f.email_field :email, placeholder: 'Required' %>
 		<%= f.password_field :password, placeholder: 'Required' %>
 		<%= f.password_field :password_confirmation, placeholder: 'Required' %>
-		<%= f.submit 'Save Details', extra_class: 'btn-block' %>
+		<%= render partial: @submit, locals: { f: f } %>
 	<% end %>
 </div>
