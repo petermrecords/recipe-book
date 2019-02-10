@@ -5,8 +5,8 @@
 </div>
 <div class='row'>
 	<div class='container' id='login-form'>
-		<% if @error %>
-			<div class='alert alert-danger'><%= @error %></div>
+		<% if flash[:notice] %>
+			<div class='alert alert-danger'><%= flash[:notice] %></div>
 		<% end %>
 		<%= bootstrap_form_tag(url: admin_login_path, local: true) do |f| %>
 			<%= f.email_field :email %>

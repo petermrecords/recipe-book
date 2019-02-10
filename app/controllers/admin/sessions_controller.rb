@@ -8,10 +8,10 @@ class Admin::SessionsController < ApplicationController
 			session[:admin] = @admin.id
 			redirect_to new_admin_path
 		elsif @admin
-			@error = 'Password is incorrect'
+			flash[:notice] = 'Password is incorrect'
 			render :new
 		else
-			@error = 'No user with that email exists'
+			flash[:notice] = 'No user with that email exists'
 			render :new
 		end
 	end
@@ -19,7 +19,7 @@ class Admin::SessionsController < ApplicationController
 	def destroy
 		if session[:admin]
 			session[:admin] = nil
-			redirect_to new_admin_path
+			redirect_to admin_login_path
 		end
 	end
 end
