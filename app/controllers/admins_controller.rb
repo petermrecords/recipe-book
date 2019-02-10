@@ -13,9 +13,15 @@ class AdminsController < ApplicationController
 	end
 
 	def edit
+		@admin = Admin.find(params[:id])
 	end
 
 	def update
+		@admin = Admin.find(params[:id]).update(admin_params)
+		if @admin.save
+		else
+			render :edit
+		end
 	end
 
 	def destroy
