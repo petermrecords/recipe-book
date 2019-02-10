@@ -1,4 +1,12 @@
 class AdminsController < ApplicationController
+	before_action only: [:new, :create] do
+		authorize_super_admin
+	end
+
+	before_action only: [:edit, :update, :destroy] do
+		authorize_current_admin
+	end
+
 	def new
 		@admin = Admin.new
 		@submit = 'submit_new'

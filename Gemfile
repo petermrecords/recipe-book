@@ -36,7 +36,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'bootstrap', '~> 4.2.1'
 gem 'jquery-rails'
-gem 'dotenv'
+gem 'dotenv-rails'
 gem 'discard', '~> 1.0'
 gem 'bootstrap_form', '>=4.1.0'
 

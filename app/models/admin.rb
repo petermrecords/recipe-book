@@ -14,6 +14,14 @@ class Admin < ApplicationRecord
 		format: { with: /\A.*[0-9].*\z/, message: 'must contain a number' },
 		length: { minimum: 6 }
 	}
+
+	before_discard do
+		if email == ENV['SUPER_ADMIN_EMAIL_ADDRESS']
+			flash[:alert] = 'Cannot delete the super admin account.'
+			redirect_to :back
+		end
+	end
+
 	def full_name
 		[first_name,last_name].join(' ')
 	end
