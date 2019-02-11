@@ -1,4 +1,4 @@
-class Admin::SessionsController < ApplicationController
+class SessionsController < ApplicationController
 	def new
 	end
 
@@ -19,7 +19,7 @@ class Admin::SessionsController < ApplicationController
 	def destroy
 		if session[:admin]
 			session[:admin] = nil
-			redirect_to admin_login_path
+			redirect_to login_path
 		end
 	end
 end

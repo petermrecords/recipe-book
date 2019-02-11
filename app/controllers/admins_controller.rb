@@ -4,7 +4,7 @@ class AdminsController < ApplicationController
 	end
 
 	before_action only: [:edit, :update, :destroy] do
-		authorize_current_admin
+		authorize_account_owner
 	end
 
 	def new
@@ -37,7 +37,13 @@ class AdminsController < ApplicationController
 
 	def destroy
 		@admin = Admin.find(params[:id])
-		@admin.discard
+		if @admin.is_super_admin?
+			flash[:alert] = 'Cannot delete the super admin account.'
+			redirect_to :back and return
+		else
+			@admin.discard
+			redirect_to login_path
+		end
 	end
 
 	private

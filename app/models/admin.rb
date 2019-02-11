@@ -9,20 +9,21 @@ class Admin < ApplicationRecord
 		uniqueness: true,
 		format: { with: /\A.+@.+\.\w*\z/, message: 'must be a valid email address' }
 	}
-	validates :password, {
-		format: { with: /\A.*[A-Za-z].*\z/, message: 'must contain a letter' },
-		format: { with: /\A.*[0-9].*\z/, message: 'must contain a number' },
-		length: { minimum: 6 }
-	}
+	validates :password, { length: { minimum: 6 } }
+	validate :password_contains_number_and_letter
 
-	before_discard do
-		if email == ENV['SUPER_ADMIN_EMAIL_ADDRESS']
-			flash[:alert] = 'Cannot delete the super admin account.'
-			redirect_to :back
-		end
-	end
+	has_many :recipes
 
 	def full_name
 		[first_name,last_name].join(' ')
+	end
+
+	def is_super_admin?
+		email == ENV['SUPER_ADMIN_EMAIL_ADDRESS']
+	end
+
+	def password_contains_number_and_letter
+		errors.add(:password, 'must contain a letter') if !/\A.*[A-Za-z].*\z/.match(password)
+		errors.add(:password, 'must contain a number') if !/\A.*[0-9].*\z/.match(password)
 	end
 end
