@@ -39,6 +39,7 @@ gem 'jquery-rails'
 gem 'dotenv-rails'
 gem 'discard', '~> 1.0'
 gem 'bootstrap_form', '>=4.1.0'
+gem 'seedbank'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
