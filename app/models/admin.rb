@@ -22,6 +22,7 @@ class Admin < ApplicationRecord
 		email == ENV['SUPER_ADMIN_EMAIL_ADDRESS']
 	end
 
+	private
 	def password_contains_number_and_letter
 		errors.add(:password, 'must contain a letter') if !/\A.*[A-Za-z].*\z/.match(password)
 		errors.add(:password, 'must contain a number') if !/\A.*[0-9].*\z/.match(password)
