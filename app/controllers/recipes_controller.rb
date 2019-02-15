@@ -19,17 +19,30 @@ class RecipesController < ApplicationController
 
 	def create
 		@recipe = Recipe.new(recipe_params)
-		@recipe.admin = current_admin
+		@recipe.author = current_admin
 		if @recipe.save
+			redirect_to edit_recipe_path(@recipe)
 		else
 			render :new
 		end
 	end
 
 	def edit
+		@recipe = Recipe.find(params[:id])
+		respond_to do |format|
+			format.js
+			format.html
+		end
 	end
 
 	def update
+		@recipe = Recipe.find(params[:id])
+		@recipe.update(recipe_params)
+		if @recipe.save
+			redirect_to edit_recipe_path(@recipe)
+		else
+			render :edit
+		end
 	end
 
 	def destroy
@@ -45,7 +58,7 @@ class RecipesController < ApplicationController
 		if @recipe && !current_admin
 			flash[:notice] = 'You must be logged in to access this.'
 			redirect_to login_path and return
-		elsif @recipe && !(@recipe.admin == current_admin || current_admin.is_super_admin?)
+		elsif @recipe && !(@recipe.author == current_admin || current_admin.is_super_admin?)
 			flash[:alert] = 'You are not authorized to access this.'
 			redirect_to :back
 		end

@@ -1,0 +1,19 @@
+<div class='container' id='new-ingredient-form'>
+	<%= bootstrap_form_for(@ingredient, url: recipe_ingredients_path, label_errors: true) do |f| %>
+		<%= f.hidden_field :recipe_id, value: @recipe.id %>
+		<%= f.select :grocery_id do %>
+			<% @groceries.each do |g| %>
+				<%= content_tag(:option, g.grocery_name, value: g.id) %>
+			<% end %>
+		<% end %>
+		<div class='form-row'>
+			<%= f.text_field :amount, wrapper: { class: 'col-6' } %>
+			<%= f.select :measurement_id, wrapper: { class: 'col-6' } do %>
+				<% @measurements.each do |m| %>
+					<%= content_tag(:option, m.measurement_name, value: m.id) %>
+				<% end %>
+			<% end %>
+		</div>
+		<%= f.submit 'Add Ingredient', extra_class: 'btn-block' %>
+	<% end %>
+</div>

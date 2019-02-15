@@ -10,9 +10,15 @@ class GroceriesController < ApplicationController
 	end
 
 	def new
+		@grocery = Grocery.new
 	end
 
 	def create
+		@grocery = Grocery.new(grocery_params)
+		if @grocery.save
+		else
+			render :new
+		end
 	end
 
 	def edit

@@ -7,5 +7,7 @@ class Recipe < ApplicationRecord
 	} }
 
 	belongs_to :author, class_name: 'Admin', foreign_key: :admin_id
-
+	has_many :ingredients
+	has_many :groceries, through: :ingredients
+	
 end

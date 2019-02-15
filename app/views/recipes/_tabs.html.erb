@@ -1,0 +1,15 @@
+<div class='wizard-tabs'>
+	<div class='container'>
+		<ul class='nav nav-tabs'>
+			<li class='nav-item'>
+				<%= link_to 'Dish Information', edit_recipe_path(@recipe), remote: true, class: "nav-link#{@ingredient || @step ? '' : ' active'}" %>
+			</li>
+			<li class='nav-item'>
+				<%= link_to 'Ingredients', new_recipe_ingredient_path(@recipe), remote: true, class: "nav-link#{@ingredient ? ' active' : ''}" %>
+			</li>
+			<li class='nav-item'>
+				<%= link_to 'Preparation', edit_recipe_path(@recipe), remote: true, class: 'nav-link disabled' %>
+			</li>
+		</ul>
+	</div>
+</div>

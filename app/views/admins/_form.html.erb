@@ -1,5 +1,5 @@
 <div class='container' id='new-admin-form'>
-	<%= bootstrap_form_for(@admin, url: admins_path, local: true, label_errors: true) do |f| %>
+	<%= bootstrap_form_for(@admin, url: (!!@admin.id ? admin_path(@admin) : admins_path), local: true, label_errors: true) do |f| %>
 		<div class='form-row'>
 			<%= f.text_field :first_name, wrapper: { class: 'col-6' }, placeholder: 'Required' %>
 			<%= f.text_field :last_name, wrapper: { class: 'col-6' }, placeholder: 'Required' %>
