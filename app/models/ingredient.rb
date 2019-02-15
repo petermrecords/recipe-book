@@ -14,10 +14,10 @@ class Ingredient < ApplicationRecord
 		presence: true
 	}
 	validates :amount, { presence: true }
-	validate :amount_validation
+	validate :common_amounts_only
 
 	def display_amount
-		amount < 1 ? amount.to_r.to_s : amount.to_s
+		amount < 1 ? amount.to_r.to_s : amount.to_i.to_s
 	end
 
 	def display_ingredient_list
@@ -25,7 +25,7 @@ class Ingredient < ApplicationRecord
 	end
 
 	private
-	def amount_validation
+	def common_amounts_only
 		if !/\A\d*\/[1,2,3,4,8]\z/.match(amount.to_r.to_s)
 			errors.add(:amount, 'must be a whole number or fraction with denominator 2,3,4 or 8')
 		end

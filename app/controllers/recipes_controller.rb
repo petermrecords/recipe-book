@@ -52,15 +52,4 @@ class RecipesController < ApplicationController
 	def recipe_params
 		params.require(:recipe).permit(:dish_name, :description, :serves)
 	end
-
-	def authorize_recipe_owner(id)
-		@recipe ||= Recipe.find(id)
-		if @recipe && !current_admin
-			flash[:notice] = 'You must be logged in to access this.'
-			redirect_to login_path and return
-		elsif @recipe && !(@recipe.author == current_admin || current_admin.is_super_admin?)
-			flash[:alert] = 'You are not authorized to access this.'
-			redirect_to :back
-		end
-	end
 end
