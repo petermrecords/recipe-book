@@ -30,6 +30,15 @@ class GroceriesController < ApplicationController
 	def destroy
 	end
 
+	def selectbox
+		@grocery_types = Grocery.grocery_types
+		@grocery_type = params[:grocery_type]
+		@groceries = Grocery.where(grocery_type: @grocery_type)
+		respond_to do |format|
+			format.js
+		end
+	end
+
 	private
 	def grocery_params
 		params.require(:grocery).permit(:grocery_name,:description,:grocery_type)

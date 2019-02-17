@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :recipes, only: [:index, :show]
+  get '/groceries/selectbox', to: 'groceries#selectbox'
   resources :groceries, only: [:index, :show]
 
   root 'admins#new'

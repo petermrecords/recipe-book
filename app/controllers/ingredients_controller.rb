@@ -5,7 +5,8 @@ class IngredientsController < ApplicationController
 
 	def new
 		@recipe = Recipe.find(params[:recipe_id])
-		@groceries = Grocery.all.order(:grocery_name).pluck(:grocery_name, :id)
+		@grocery_types = Grocery.grocery_types
+		@groceries = Grocery.where(grocery_type: @grocery_types.first).order(:grocery_name).pluck(:grocery_name, :id)
 		@measurements = Measurement.all.order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 		@ingredient = Ingredient.new
 		respond_to do |format|
@@ -17,7 +18,6 @@ class IngredientsController < ApplicationController
 	def create
 		@recipe = Recipe.find(params[:recipe_id])
 		@ingredient = Ingredient.new(ingredient_params)
-		@ingredient.recipe = @recipe
 		@groceries = Grocery.all.order(:grocery_name).pluck(:grocery_name, :id)
 		@measurements = Measurement.all.order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 		if @ingredient.save

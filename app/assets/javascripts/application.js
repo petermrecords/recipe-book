@@ -16,3 +16,14 @@
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
+
+$(document).ready(function() {
+	$("#wizard-content").on("change", "#grocery_type", function(event) {
+		$.ajax({
+			url: '/groceries/selectbox',
+			data: {
+				grocery_type: this.value
+			}
+		});
+	});
+});
