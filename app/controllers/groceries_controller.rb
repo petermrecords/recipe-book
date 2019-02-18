@@ -33,7 +33,7 @@ class GroceriesController < ApplicationController
 	def selectbox
 		@grocery_types = Grocery.grocery_types
 		@grocery_type = params[:grocery_type]
-		@groceries = Grocery.where(grocery_type: @grocery_type)
+		@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
 		respond_to do |format|
 			format.js
 		end

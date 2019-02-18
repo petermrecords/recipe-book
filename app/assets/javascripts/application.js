@@ -18,6 +18,7 @@
 //= require_tree .
 
 $(document).ready(function() {
+	
 	$("#wizard-content").on("change", "#grocery_type", function(event) {
 		$.ajax({
 			url: '/groceries/selectbox',
@@ -26,4 +27,14 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	$("#wizard-content").on("change","#measurement_type", function(event) {
+		$.ajax({
+			url: '/measurements/selectbox',
+			data: {
+				measurement_type: this.value
+			}
+		});
+	});
+
 });

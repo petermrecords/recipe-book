@@ -7,7 +7,10 @@ class IngredientsController < ApplicationController
 		@recipe = Recipe.find(params[:recipe_id])
 		@grocery_types = Grocery.grocery_types
 		@groceries = Grocery.where(grocery_type: @grocery_types.first).order(:grocery_name).pluck(:grocery_name, :id)
-		@measurements = Measurement.all.order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
+		@grocery_type = @grocery_types.first
+		@measurement_types = Measurement.measurement_types
+		@measurement_type = @measurement_types.first
+		@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 		@ingredient = Ingredient.new
 		respond_to do |format|
 			format.js
@@ -19,7 +22,9 @@ class IngredientsController < ApplicationController
 		@recipe = Recipe.find(params[:recipe_id])
 		@ingredient = Ingredient.new(ingredient_params)
 		@groceries = Grocery.all.order(:grocery_name).pluck(:grocery_name, :id)
-		@measurements = Measurement.all.order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
+		@measurement_types = Measurement.measurement_types
+		@measurement_type = @measurement_types.first
+		@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 		if @ingredient.save
 			respond_to do |format|
 				format.js do

@@ -2,11 +2,10 @@
 	<%= bootstrap_form_for(@ingredient, url: recipe_ingredients_path, label_errors: true) do |f| %>
 		<%= f.hidden_field :recipe_id, value: @recipe.id %>
 		<div class='form-row' id='groceries-row'>
-			<%= render partial: 'groceries/form_row' %>
+			<%= render partial: 'groceries/ingredient_form_row' %>
 		</div>
-		<div class='form-row'>
-			<%= f.text_field :amount, wrapper: { class: 'col-6' } %>
-			<%= f.select :measurement_id, @measurements, { wrapper: { class: 'col-6' } } %>
+		<div class='form-row' id='measurements-row'>
+			<%= render partial: 'measurements/ingredient_form_row' %>
 		</div>
 		<%= f.submit 'Add Ingredient', extra_class: 'btn-block' %>
 	<% end %>
