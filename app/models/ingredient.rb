@@ -17,6 +17,10 @@ class Ingredient < ApplicationRecord
 	validates :comment, { length: { maximum: 100 } }
 	validate :common_amounts_only
 
+	before_save do |ingredient|
+		measurement_override = nil if measurement.measurement_name != "Pieces"
+	end
+
 	def display_amount
 		if amount < 1 
 			amount.to_r.to_s

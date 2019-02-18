@@ -1,6 +1,6 @@
 <div class='container' id='new-ingredient-form'>
 	<h4>Ingredient Picker</h4>
-	<%= bootstrap_form_for(@ingredient, url: recipe_ingredients_path, label_errors: true) do |f| %>
+	<%= bootstrap_form_for(@ingredient, url: (@ingredient.id ? recipe_ingredient_path(@recipe, @ingredient) : recipe_ingredients_path(@recipe)), remote: true) do |f| %>
 		<%= f.hidden_field :recipe_id, value: @recipe.id %>
 		<div class='form-row' id='groceries-row'>
 			<%= render partial: 'groceries/ingredient_form_row' %>
@@ -9,6 +9,6 @@
 			<%= render partial: 'measurements/ingredient_form_row' %>
 		</div>
 		<%= f.text_field :comment, help: 'Keep it brief, e.g. "chopped"' %>
-		<%= f.submit 'Add Ingredient', extra_class: 'btn-block' %>
+		<%= f.submit 'Update Ingredients', extra_class: 'btn-block' %>
 	<% end %>
 </div>

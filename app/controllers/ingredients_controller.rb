@@ -1,13 +1,13 @@
 class IngredientsController < ApplicationController
-	before_action only: [:new, :create] do
+	before_action do
 		authorize_recipe_owner(params[:recipe_id])
 	end
 
 	def new
 		@recipe = Recipe.includes(:ingredients).find(params[:recipe_id])
 		@grocery_types = Grocery.grocery_types
-		@groceries = Grocery.where(grocery_type: @grocery_types.first).order(:grocery_name).pluck(:grocery_name, :id)
 		@grocery_type = @grocery_types.first
+		@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
 		@measurement_types = Measurement.measurement_types
 		@measurement_type = @measurement_types.first
 		@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
@@ -19,26 +19,89 @@ class IngredientsController < ApplicationController
 	end
 
 	def create
-		@recipe = Recipe.includes(:ingredients).find(params[:recipe_id])
 		@ingredient = Ingredient.new(ingredient_params)
-		@groceries = Grocery.all.order(:grocery_name).pluck(:grocery_name, :id)
-		@grocery_types = Grocery.grocery_types
-		@measurement_types = Measurement.measurement_types
-		@measurement_type = @measurement_types.first
-		@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 		if @ingredient.save
+			@recipe = Recipe.includes(:ingredients).find(params[:recipe_id])
+			@grocery_types = Grocery.grocery_types
+			@grocery_type = @grocery_types.first
+			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
+			@measurement_types = Measurement.measurement_types
+			@measurement_type = @measurement_types.first
+			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
+			@ingredient = Ingredient.new
 			respond_to do |format|
 				format.js do
-					@ingredient = Ingredient.new
 					render :new
 				end
 				format.html { redirect_to new_recipe_ingredient_path(@recipe) }
 			end
 		else
+			@grocery_types = Grocery.grocery_types
+			@grocery_type = @ingredient.grocery.grocery_type
+			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
+			@measurement_types = Measurement.measurement_types
+			@measurement_type = @ingredient.measurement.measurement_type
+			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 			respond_to do |format|
 				format.js { render :new }
 				format.html { render :new }
 			end
+		end
+	end
+
+	def edit
+		@ingredient = Ingredient.find(params[:id])
+		@recipe = @ingredient.recipe
+		@grocery_types = Grocery.grocery_types
+		@grocery_type = @ingredient.grocery.grocery_type
+		@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
+		@measurement_types = Measurement.measurement_types
+		@measurement_type = @ingredient.measurement.measurement_type
+		@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
+		respond_to do |format|
+			format.js { render :new }
+		end
+	end
+
+	def update
+		@ingredient = Ingredient.find(params[:id])
+		@recipe = @ingredient.recipe
+		@grocery_types = Grocery.grocery_types
+		@measurement_types = Measurement.measurement_types
+		@ingredient.update(ingredient_params)
+		if @ingredient.save
+			@grocery_type = @grocery_types.first
+			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
+			@ingredient = Ingredient.new
+			@measurement_type = @measurement_types.first
+			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
+		else
+			@grocery_type = @ingredient.grocery.grocery_type
+			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
+			@measurement_type = @ingredient.measurement.measurement_type
+			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
+		end
+		respond_to do |format|
+			format.js { render :new }
+		end
+	end
+
+	def destroy
+		@ingredient = Ingredient.find(params[:id])
+		@ingredient.destroy
+		respond_to do |format|
+			@recipe = Recipe.includes(:ingredients).find(params[:recipe_id])
+			format.js do
+				@grocery_types = Grocery.grocery_types
+				@grocery_type = @grocery_types.first
+				@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
+				@measurement_types = Measurement.measurement_types
+				@measurement_type = @measurement_types.first
+				@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
+				@ingredient = Ingredient.new
+				render :new
+			end
+			format.html { redirect_to new_recipe_ingredient_path(@recipe) }
 		end
 	end
 
