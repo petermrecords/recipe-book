@@ -4,7 +4,7 @@ class IngredientsController < ApplicationController
 	end
 
 	def new
-		@recipe = Recipe.find(params[:recipe_id])
+		@recipe = Recipe.includes(:ingredients).find(params[:recipe_id])
 		@grocery_types = Grocery.grocery_types
 		@groceries = Grocery.where(grocery_type: @grocery_types.first).order(:grocery_name).pluck(:grocery_name, :id)
 		@grocery_type = @grocery_types.first
@@ -19,9 +19,10 @@ class IngredientsController < ApplicationController
 	end
 
 	def create
-		@recipe = Recipe.find(params[:recipe_id])
+		@recipe = Recipe.includes(:ingredients).find(params[:recipe_id])
 		@ingredient = Ingredient.new(ingredient_params)
 		@groceries = Grocery.all.order(:grocery_name).pluck(:grocery_name, :id)
+		@grocery_types = Grocery.grocery_types
 		@measurement_types = Measurement.measurement_types
 		@measurement_type = @measurement_types.first
 		@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
@@ -43,6 +44,6 @@ class IngredientsController < ApplicationController
 
 	private
 	def ingredient_params
-		params.require(:ingredient).permit(:grocery_id, :measurement_id, :amount, :measurement_override, :comment)
+		params.require(:ingredient).permit(:recipe_id, :grocery_id, :measurement_id, :amount, :measurement_override, :comment)
 	end
 end

@@ -2,8 +2,8 @@
 	<label class="required" for="ingredient_amount">Amount</label>
 	<input class="form-control" type="text" name="ingredient[amount]" id="ingredient_amount">
 </div>
-<div class='form-group col-4'>
-	<label for='measurement_type'>Type</label>
+<div class='form-group col-5'>
+	<label for='measurement_type'>&nbsp;</label>
 	<select class='form-control' name='measurement_type' id='measurement_type'>
 		<% @measurement_types.each do |measurement_type| %>
 			<% if measurement_type == @measurement_type %>
@@ -13,9 +13,12 @@
 			<% end %>
 		<% end %>
 	</select>
+	<% if @measurement_type != 'Pieces' %>
+		<small class='form-text text-muted'>Browse by type and pick a measurement.</small>
+	<% end %>
 </div>
-<div class='form-group col-6'>
-	<label for='ingredient_measurement_id'>Measure</label>
+<div class='form-group col-5'>
+	<label for='ingredient_measurement_id'>&nbsp;</label>
 	<% if @measurement_type != 'Pieces' %>
 		<select class='form-control' name='ingredient[measurement_id]' id='ingredient_measurement_id'>
 			<% @measurements.each do |measurement| %>
@@ -23,8 +26,8 @@
 			<% end %>
 		</select>
 	<% else %>
-		<input class='form-control' type='hidden' name='ingredient[measurement_id]' id='ingredient_measurement_id' value="<%= @measurements.first.last %>">
-		<input class='form-control' type='text' name='ingredient[measurement_override]' id='ingredient_measurement_override'>
-		<small class='form-text text-muted'>Leave blank for "pieces"</small>
+		<input class='form-control' type='hidden' name='ingredient[measurement_id]' id='ingredient_measurement_id' value="<%= @measurements.first.last %>"/>
+		<input class='form-control' type='text' name='ingredient[measurement_override]' id='ingredient_measurement_override' placeholder='Can be blank'/>
+		<small class='form-text text-muted'>Type a measurement to display.</small>
 	<% end %>
 </div>

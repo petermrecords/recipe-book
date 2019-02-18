@@ -1,4 +1,5 @@
 <div class='container' id='new-ingredient-form'>
+	<h4>Ingredient Picker</h4>
 	<%= bootstrap_form_for(@ingredient, url: recipe_ingredients_path, label_errors: true) do |f| %>
 		<%= f.hidden_field :recipe_id, value: @recipe.id %>
 		<div class='form-row' id='groceries-row'>

@@ -32,7 +32,7 @@ class Ingredient < ApplicationRecord
 	end
 
 	def display_comment
-		comment ? (', ' << comment) : nil
+		comment > '' ? (', ' << comment) : ''
 	end
 
 	def display_ingredient_list
