@@ -7,6 +7,7 @@
 		<div class='form-row' id='measurements-row'>
 			<%= render partial: 'measurements/ingredient_form_row' %>
 		</div>
+		<%= f.text_field :comment, help: 'Keep it brief, e.g. "chopped"' %>
 		<%= f.submit 'Add Ingredient', extra_class: 'btn-block' %>
 	<% end %>
 </div>

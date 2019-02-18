@@ -14,14 +14,29 @@ class Ingredient < ApplicationRecord
 		presence: true
 	}
 	validates :amount, { presence: true }
+	validates :comment, { length: { maximum: 100 } }
 	validate :common_amounts_only
 
 	def display_amount
-		amount < 1 ? amount.to_r.to_s : amount.to_i.to_s
+		if amount < 1 
+			amount.to_r.to_s
+		elsif amount % 1 != 0
+			[amount.to_i.to_s, (amount % 1).to_r.to_s].join(' ')
+		else
+			amount.to_i.to_s
+		end
+	end
+
+	def display_measurement
+		measurement_override ? measurement_override : measurement.abbreviation
+	end
+
+	def display_comment
+		comment ? (', ' << comment) : nil
 	end
 
 	def display_ingredient_list
-		"#{display_amount} #{measurement.abbreviation} #{grocery.grocery_name}"
+		"#{display_amount} #{display_measurement} #{grocery.grocery_name}#{display_comment}"
 	end
 
 	private

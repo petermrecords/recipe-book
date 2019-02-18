@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_011148) do
+ActiveRecord::Schema.define(version: 2019_02_18_041052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2019_02_15_011148) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "amount", null: false
+    t.string "measurement_override"
+    t.string "comment"
     t.index ["grocery_id"], name: "index_ingredients_on_grocery_id"
     t.index ["measurement_id"], name: "index_ingredients_on_measurement_id"
     t.index ["recipe_id", "grocery_id"], name: "unique_ingredient_index", unique: true

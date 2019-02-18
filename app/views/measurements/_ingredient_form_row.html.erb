@@ -16,9 +16,15 @@
 </div>
 <div class='form-group col-6'>
 	<label for='ingredient_measurement_id'>Measure</label>
-	<select class='form-control' name='ingredient[measurement_id]' id='ingredient_measurement_id'>
-		<% @measurements.each do |measurement| %>
-			<option value="<%= measurement.last %>"><%= measurement.first %></option>
-		<% end %>
-	</select>
+	<% if @measurement_type != 'Pieces' %>
+		<select class='form-control' name='ingredient[measurement_id]' id='ingredient_measurement_id'>
+			<% @measurements.each do |measurement| %>
+				<option value="<%= measurement.last %>"><%= measurement.first %></option>
+			<% end %>
+		</select>
+	<% else %>
+		<input class='form-control' type='hidden' name='ingredient[measurement_id]' id='ingredient_measurement_id' value="<%= @measurements.first.last %>">
+		<input class='form-control' type='text' name='ingredient[measurement_override]' id='ingredient_measurement_override'>
+		<small class='form-text text-muted'>Leave blank for "pieces"</small>
+	<% end %>
 </div>
