@@ -14,6 +14,7 @@
 
 @import "bootstrap";
 @import "rails_bootstrap_forms";
+@import "font-awesome";
 
 .wizard-form-container {
 	padding: 32px;
@@ -26,4 +27,8 @@
 .wizard-tabs {
 	padding-left: 4px;
 	padding-right: 4px;
+}
+
+.ingredient-wizard-list {
+	width: 100%;
 }

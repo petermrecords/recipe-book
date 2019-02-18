@@ -1,1 +1,4 @@
-<li><%= ingredient.display_ingredient_list %></li>
+<li class='ingredient-wizard-list-item'>
+	<%= ingredient.display_ingredient_list %>
+	<span class='text-right'><%= link_to fa_icon 'edit', url: edit_ingredient_path(ingredient) %></span>
+</li>
