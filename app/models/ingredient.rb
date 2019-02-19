@@ -1,7 +1,9 @@
 class Ingredient < ApplicationRecord
+	# associations
 	belongs_to :measurement
 	belongs_to :grocery
 	belongs_to :recipe
+	# validations
 	validates :recipe, {
 		uniqueness: { scope: :grocery },
 		presence: true
@@ -13,14 +15,14 @@ class Ingredient < ApplicationRecord
 	validates :measurement, {
 		presence: true
 	}
-	validates :amount, { presence: true }
+	validates :amount, { presence: true, numericality: { greater_than: 0 } }
 	validates :comment, { length: { maximum: 100 } }
 	validate :common_amounts_only
-
+	# callbacks
 	before_save do |ingredient|
 		measurement_override = nil if measurement.measurement_name != "Pieces"
 	end
-
+	# display helpers
 	def display_amount
 		if amount < 1 
 			amount.to_r.to_s
@@ -44,6 +46,7 @@ class Ingredient < ApplicationRecord
 	end
 
 	private
+	# custom validation
 	def common_amounts_only
 		if !/\A\d*\/[1,2,3,4,8]\z/.match(amount.to_r.to_s)
 			errors.add(:amount, 'must be a whole number or fraction with denominator 2,3,4 or 8')

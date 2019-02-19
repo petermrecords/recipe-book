@@ -36,11 +36,13 @@ class IngredientsController < ApplicationController
 				format.html { redirect_to new_recipe_ingredient_path(@recipe) }
 			end
 		else
+			@errors = @ingredient.errors
+			byebug
 			@grocery_types = Grocery.grocery_types
-			@grocery_type = @ingredient.grocery.grocery_type
+			@grocery_type = @ingredient.grocery ? @ingredient.grocery.grocery_type : @grocery_types.first
 			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
 			@measurement_types = Measurement.measurement_types
-			@measurement_type = @ingredient.measurement.measurement_type
+			@measurement_type = @ingredient.measurement ? @ingredient.measurement.measurement_type : @measurement_types.first
 			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 			respond_to do |format|
 				format.js { render :new }
@@ -76,6 +78,7 @@ class IngredientsController < ApplicationController
 			@measurement_type = @measurement_types.first
 			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 		else
+			@errors = @ingredient.errors
 			@grocery_type = @ingredient.grocery.grocery_type
 			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
 			@measurement_type = @ingredient.measurement.measurement_type
@@ -91,16 +94,7 @@ class IngredientsController < ApplicationController
 		@ingredient.destroy
 		respond_to do |format|
 			@recipe = Recipe.includes(:ingredients).find(params[:recipe_id])
-			format.js do
-				@grocery_types = Grocery.grocery_types
-				@grocery_type = @grocery_types.first
-				@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
-				@measurement_types = Measurement.measurement_types
-				@measurement_type = @measurement_types.first
-				@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
-				@ingredient = Ingredient.new
-				render :new
-			end
+			format.js
 			format.html { redirect_to new_recipe_ingredient_path(@recipe) }
 		end
 	end

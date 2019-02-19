@@ -13,8 +13,8 @@ Rails.application.routes.draw do
     resources :groceries, only: [:new, :create, :edit, :update, :destroy]
   end
 
-  get '/measurements/selectbox', to: 'measurements#selectbox'
-  get '/groceries/selectbox', to: 'groceries#selectbox'
+  get 'measurements/selectbox', to: 'measurements#selectbox'
+  get 'groceries/selectbox', to: 'groceries#selectbox'
 
   resources :recipes, only: [:index, :show]
   resources :groceries, only: [:index, :show]

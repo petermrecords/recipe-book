@@ -1,6 +1,6 @@
 <div class='form-group col-2'>
 	<label class="required" for="ingredient_amount">Amount</label>
-	<input class="form-control" type="text" name="ingredient[amount]" id="ingredient_amount" value="<%= @ingredient.amount %>">
+	<input class="form-control" type="text" name="ingredient[amount]" id="ingredient_amount" value="<%= @ingredient ? @ingredient.amount : nil %>">
 </div>
 <div class='form-group col-5'>
 	<label for='measurement_type'>&nbsp;</label>
@@ -22,7 +22,7 @@
 	<% if @measurement_type != 'Pieces' %>
 		<select class='form-control' name='ingredient[measurement_id]' id='ingredient_measurement_id'>
 			<% @measurements.each do |measurement| %>
-				<% if measurement.last == @ingredient.measurement_id %>
+				<% if @ingredient && measurement.last == @ingredient.measurement_id %>
 					<option value="<%= measurement.last %>" selected><%= measurement.first %></option>
 				<% else %>
 					<option value="<%= measurement.last %>"><%= measurement.first %></option>

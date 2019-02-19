@@ -24,6 +24,7 @@
 	margin-left: 16px;
 	margin-right: 16px;
 }
+
 .wizard-tabs {
 	padding-left: 4px;
 	padding-right: 4px;
@@ -31,4 +32,9 @@
 
 .ingredient-wizard-list {
 	width: 100%;
+	border-bottom: 1px dotted #BDC3C7;
+}
+
+.ingredient-wizard-list-item-active {
+	background:#d2f2f3;
 }
