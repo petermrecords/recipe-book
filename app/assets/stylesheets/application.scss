@@ -12,17 +12,35 @@
  *
  */
 
+@import url('https://fonts.googleapis.com/css?family=Rock+Salt|Permanent+Marker');
 @import "bootstrap";
 @import "rails_bootstrap_forms";
 @import "font-awesome";
 
+body {
+	background-color: #FFFAF3;
+}
+
 .wizard-form-container {
 	padding: 32px;
-	border: 1px solid #BDC3C7;
-	border-top: 3px solid #BDC3C7;
+	border: 3px solid #BDC3C7;
 	border-radius: 3px;
 	margin-left: 16px;
 	margin-right: 16px;
+	min-height: 480px;
+	background: #EDE3D3;
+	h4 {
+		font-family: 'Permanent Marker', cursive;
+	}
+	label {
+		font-family: 'Rock Salt', cursive;
+		font-size: 0.8em;
+	}
+	.btn {
+		background: #48873D;
+		font-family: 'Permanent Marker', cursive;
+		color: black;
+	}
 }
 
 .wizard-tabs {
@@ -33,8 +51,15 @@
 .ingredient-wizard-list {
 	width: 100%;
 	border-bottom: 1px dotted #BDC3C7;
+	.ingredient-display {
+		font-family: 'Rock Salt', cursive;
+		font-size: 0.8em;
+	}
+	a {
+		color: #48873D;
+	}
 }
 
-.ingredient-wizard-list-item-active {
+.ingredient-wizard-list .active {
 	background:#d2f2f3;
 }
