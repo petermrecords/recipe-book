@@ -1,25 +1,26 @@
-<div class='form-group col-6'>
+<div class='form-group col-4'>
 	<label for='grocery_type'>Ingredient</label>
 	<select class='form-control' name='grocery_type' id='grocery_type'>
-		<% @grocery_types.each do |grocery_type|%>
-			<% if grocery_type == @grocery_type %>
-				<option value="<%= grocery_type %>" selected><%= grocery_type %></option>
-			<% else %> 
-				<option value="<%= grocery_type %>"><%= grocery_type %></option>
-			<% end %>
-		<% end %>
+		<%= render partial: 'groceries/type_selectbox' %>
 	</select>
-	<small class='form-text text-muted'>Browse by type and pick an ingredient.</small>
 </div>
-<div class='form-group col-6'>
+<div class='form-group col-8'>
 	<label for='ingredient_grocery_id'>&nbsp;</label>
-	<select class='form-control' name='ingredient[grocery_id]' id='ingredient_grocery_id'>
-		<% @groceries.each do |grocery|%>
-			<% if @ingredient && grocery.last == @ingredient.grocery_id %>
-				<option value="<%= grocery.last %>" selected><%= grocery.first %></option>
-			<% else %>
-				<option value="<%= grocery.last %>"><%= grocery.first %></option>
+	<div class='input-group'>
+		<div class='input-group-prepend'>
+			<div class='input-group-text'>
+				<%= link_to (fa_icon 'plus'), new_grocery_path(grocery_type: @grocery_type), remote: true %>
+			</div>
+		</div>
+		<select class='form-control' name='ingredient[grocery_id]' id='ingredient_grocery_id'>
+			<% @groceries.each do |grocery|%>
+				<% if @ingredient && grocery.last == @ingredient.grocery_id %>
+					<option value="<%= grocery.last %>" selected><%= grocery.first %></option>
+				<% else %>
+					<option value="<%= grocery.last %>"><%= grocery.first %></option>
+				<% end %>
 			<% end %>
-		<% end %>
-	</select>
+		</select>
+	</div>
+	<small class='form-text text-muted'>Browse by type and pick an ingredient.</small>
 </div>

@@ -11,13 +11,26 @@ class GroceriesController < ApplicationController
 
 	def new
 		@grocery = Grocery.new
+		@grocery_types = Grocery.grocery_types
+		@grocery_type = params[:grocery_type]
+		respond_to do |format|
+			format.js
+		end
 	end
 
 	def create
 		@grocery = Grocery.new(grocery_params)
+		@grocery_types = Grocery.grocery_types
+		@grocery_type = params[:grocery][:grocery_type]
 		if @grocery.save
+			@grocery = Grocery.new
+			respond_to do |format|
+				format.js
+			end
 		else
-			render :new
+			respond_to do |format|
+				format.js
+			end
 		end
 	end
 

@@ -1,0 +1,23 @@
+<div class='modal fade' id='new-grocery-form' tabindex='-1' data-keyboard='true'>
+	<div class='modal-dialog modal-dialog-centered'>
+		<div class='modal-content'>
+			<div class='modal-header'>
+				<h5>Quick Add Grocery</h5>
+				<small class='text-muted'>Missing an ingredient?  Add it here.</small>
+			</div>
+			<div class='modal-body'>
+				<%= bootstrap_form_for(@grocery, url: groceries_path, remote: true) do |f| %>
+					<%= f.text_field :grocery_name, label: 'Name' %>
+					<div class='form-group'>
+						<label for='grocery[grocery_type]'>Type</label>
+						<select class='form-control' name='grocery[grocery_type]' id='grocery[grocery_type]'>
+							<%= render partial: 'type_selectbox' %>
+						</select>
+					</div>
+					<%= f.text_area :description %>
+					<%= f.submit 'Add Item', extra_class: 'btn-block' %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

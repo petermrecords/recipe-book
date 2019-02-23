@@ -21,7 +21,7 @@ body {
 	background-color: #FFFAF3;
 }
 
-.wizard-form-container {
+.wizard-content {
 	padding: 32px;
 	border: 3px solid #BDC3C7;
 	border-radius: 3px;
@@ -43,12 +43,15 @@ body {
 	}
 }
 
-.wizard-tabs {
+.wizard-nav {
 	padding-left: 4px;
 	padding-right: 4px;
+	a {
+		color: #48873D;
+	}
 }
 
-.ingredient-wizard-list {
+.ingredient-wizard-list-item {
 	width: 100%;
 	border-bottom: 1px dotted #BDC3C7;
 	.ingredient-display {
@@ -59,7 +62,7 @@ body {
 		color: #48873D;
 	}
 }
-
+// fix this
 .ingredient-wizard-list .active {
 	background:#d2f2f3;
 }

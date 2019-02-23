@@ -1,4 +1,4 @@
-<div class='container wizard-form-container' id='new-recipe-form'>
+<div class='container wizard-content' id='recipe-form'>
 	<h4>Dish Description</h4>
 	<%= bootstrap_form_for(@recipe, url: (!!@recipe.id ? recipe_path(@recipe) : recipes_path), label_errors: true) do |f| %>
 		<div class='form-row'>

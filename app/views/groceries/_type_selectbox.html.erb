@@ -1,0 +1,7 @@
+<% @grocery_types.each do |grocery_type|%>
+	<% if grocery_type == @grocery_type %>
+		<option value="<%= grocery_type %>" selected><%= grocery_type %></option>
+	<% else %> 
+		<option value="<%= grocery_type %>"><%= grocery_type %></option>
+	<% end %>
+<% end %>
