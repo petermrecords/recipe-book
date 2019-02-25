@@ -18,10 +18,7 @@ class Ingredient < ApplicationRecord
 	validates :amount, { presence: true, numericality: { greater_than: 0 } }
 	validates :comment, { length: { maximum: 100 } }
 	validate :common_amounts_only
-	# callbacks
-	before_save do |ingredient|
-		measurement_override = nil if measurement.measurement_name != "Pieces"
-	end
+
 	# display helpers
 	def display_amount
 		if amount < 1 
@@ -46,6 +43,10 @@ class Ingredient < ApplicationRecord
 	end
 
 	private
+	# callbacks
+	before_save do |ingredient|
+		measurement_override = nil if measurement.measurement_name != "Pieces"
+	end
 	# custom validation
 	def common_amounts_only
 		if !/\A\d*\/[1,2,3,4,8]\z/.match(amount.to_r.to_s)

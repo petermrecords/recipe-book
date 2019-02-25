@@ -9,8 +9,10 @@ Rails.application.routes.draw do
 
   	resources :recipes, only: [:new, :create, :edit, :update, :destroy] do
       resources :ingredients, only: [:new, :create, :edit, :update, :destroy]
+      resources :steps, only: [:new, :create, :edit, :update, :destroy]
     end
     resources :groceries, only: [:new, :create, :edit, :update, :destroy]
+    get '/', to: 'recipes#new', as: 'admin_root'
   end
 
   get 'measurements/selectbox', to: 'measurements#selectbox'
