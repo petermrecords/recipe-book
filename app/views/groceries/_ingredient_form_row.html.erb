@@ -14,7 +14,7 @@
 		</div>
 		<select class='form-control' name='ingredient[grocery_id]' id='ingredient_grocery_id'>
 			<% @groceries.each do |grocery|%>
-				<% if @ingredient && grocery.last == @ingredient.grocery_id %>
+				<% if @ingredient && grocery.last == @ingredient.grocery_id || @grocery && grocery.last == @grocery.id %>
 					<option value="<%= grocery.last %>" selected><%= grocery.first %></option>
 				<% else %>
 					<option value="<%= grocery.last %>"><%= grocery.first %></option>

@@ -37,4 +37,12 @@ $(document).ready(function() {
 		});
 	});
 
+	$("#modal-anchor").on("submit","#new_grocery", function(event) {
+		$("#new-grocery-form").modal("toggle");
+	});
+
+	$("#modal-anchor").on("hidden.bs.modal","#new-grocery-form", function(event) {
+		$("#modal-anchor").html("");
+	});
+
 });

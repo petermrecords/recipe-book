@@ -19,7 +19,7 @@ class Admin < ApplicationRecord
 	end
 
 	def is_super_admin?
-		email == ENV['SUPER_ADMIN_EMAIL_ADDRESS']
+		kept && email == ENV['SUPER_ADMIN_EMAIL_ADDRESS']
 	end
 
 	private

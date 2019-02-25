@@ -5,6 +5,7 @@ class Grocery < ApplicationRecord
 		presence: true,
 		inclusion: { in: @grocery_types }
 	}
+	validates :grocery_name, { presence: true }
 	validate :name_uniqueness_validation
 
 	def self.grocery_types
