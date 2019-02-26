@@ -8,7 +8,7 @@
 				<%= link_to 'Ingredients', new_recipe_ingredient_path(@recipe), remote: true, class: "nav-link#{@ingredient ? ' active' : ''}" %>
 			</li>
 			<li class='nav-item'>
-				<%= link_to 'Preparation', edit_recipe_path(@recipe), remote: true, class: 'nav-link disabled' %>
+				<%= link_to 'Preparation', new_recipe_step_path(@recipe), remote: true, class: "nav-link #{@step ? ' active' : ''}" %>
 			</li>
 		</ul>
 	</div>

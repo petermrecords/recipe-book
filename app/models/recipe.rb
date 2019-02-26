@@ -1,4 +1,10 @@
 class Recipe < ApplicationRecord
+	# associations
+	belongs_to :author, class_name: 'Admin', foreign_key: :admin_id
+	has_many :ingredients
+	has_many :groceries, through: :ingredients
+	has_many :steps
+	# validations
 	validates :dish_name, { presence: true, uniqueness: true }
 	validates :author, { presence: true }
 	validates :serves, { presence: true, numericality: {
@@ -6,10 +12,10 @@ class Recipe < ApplicationRecord
 		less_than_or_equal_to: 12
 	} }
 
-	belongs_to :author, class_name: 'Admin', foreign_key: :admin_id
-	has_many :ingredients
-	has_many :groceries, through: :ingredients
-	has_many :steps
+	# step order-related helpers
+	def next_step_index
+		steps.count + 1
+	end
 
 	def reindex_steps
 		recipe_steps = steps.order(step_order: :asc, modified: :desc)
