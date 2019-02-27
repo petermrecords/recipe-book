@@ -1,7 +1,7 @@
 <div class='container wizard-content'>
 	<div class='row'>
 		<div class='col-4' id='step-list'>
-			<p>coming soon</p>
+			<%= render partial: 'steps/list', locals: { steps: @recipe.steps.order(:step_order) } %>
 		</div>
 		<div class='col-8' id='step-form'>
 			<%= render partial: 'steps/form' %>

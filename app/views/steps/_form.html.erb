@@ -5,10 +5,13 @@
 		<div class='form-row'>
 			<%= f.number_field :step_order, label: 'Order', wrapper: { class: 'col-3' }, value: @recipe.next_step_index %>
 			<%= f.number_field :prep_time_value, label: 'Prep Time', wrapper: { class: 'col-3' }, value: 1 %>
-			<%= f.select :prep_time_units, [['Seconds','seconds'],['Minutes','minutes'],['Hours','hours']], label: '', wrapper: { class: 'col-4' } %>
-			<%= f.form_group :is_active, class: 'col-2 justify-content-bottom' do %>
-				<%= f.check_box :is_active, label: 'Active' %>
-			<% end %>
+			<%= f.select :prep_time_units, [['Seconds','seconds'],['Minutes','minutes'],['Hours','hours']], wrapper: { class: 'col-3' } %>
+			<div class='col-3' id='active-check'>
+				<div class='custom-control custom-checkbox custom-control-inline'>
+			    <input type='checkbox' class='custom-control-input custom-control-inline' name='step[is_active]' id='step[is_active]'>
+			    <label class='custom-control-label' for='step[is_active]'>Active?</label>
+			  </div>
+			</div>
 		</div>
 		<%= f.text_area :instruction, rows: 8 %>
 		<%= f.submit 'Update Steps', extra_class: 'btn-block' %>

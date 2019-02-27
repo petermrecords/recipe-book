@@ -7,11 +7,6 @@ class Step < ApplicationRecord
   validates :prep_time, { presence: true }
   validates :is_active, { inclusion: { in: [true, false] } }
   validates :instruction, { presence: true }
-  
-  # display helpers
-  def tease
-  	instruction.slice(0,30)
-  end
 
   def prep_time_units
   end

@@ -17,12 +17,15 @@ class Recipe < ApplicationRecord
 		steps.count + 1
 	end
 
-	def reindex_steps
-		recipe_steps = steps.order(step_order: :asc, modified: :desc)
-		recipe_steps.each_with_index do |step, step_index|
-			step.step_order = step_index + 1
+	def reindex_steps(added_index)
+		index_counter = 1
+		steps.order(step_order: :asc, updated_at: :desc).each do |step|
+			debugger
+			index_counter += 1 if step.step_order == added_index
+			step.step_order = index_counter
+			index_counter += 1
+			step.save
 		end
-		recipe_steps.save
 	end
 
 end
