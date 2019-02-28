@@ -17,11 +17,12 @@ class StepsController < ApplicationController
 		@step = Step.new(step_params)
 		@step.prep_time = parse_prep_time(params[:step][:prep_time_value], params[:step][:prep_time_units])
 		@step.is_active = !!@step.is_active
-		@recipe.reindex_steps(@step.step_order) if @step.step_order != @recipe.next_step_index
 		if @step.save
+			@recipe.reindex_steps(@step.step_order)
 			@step = Step.new
 			respond_to do |format|
-				format.js { render :new } 
+				format.js { render :new }
+				format.html { redirect_to new_recipe_step_path(@recipe) }
 			end
 		else
 		end
@@ -32,6 +33,7 @@ class StepsController < ApplicationController
 		@step = Step.find(params[:id])
 		respond_to do |format|
 			format.js { render :new }
+			format.html { render :new }
 		end
 	end
 
@@ -44,9 +46,11 @@ class StepsController < ApplicationController
 		@recipe.reindex_steps(@step.step_order)
 		debugger
 		if @step.save
+			@recipe.reindex_steps(@step.step_order) if @step.step_order != @recipe.next_step_index
 			@step = Step.new
 			respond_to do |format|
 				format.js { render :new }
+				format.html { redirect_to new_recipe_step_path(@recipe) }
 			end
 		else
 		end
