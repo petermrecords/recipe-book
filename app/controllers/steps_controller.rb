@@ -30,6 +30,9 @@ class StepsController < ApplicationController
 	def edit
 		@recipe = Recipe.includes(:steps).find(params[:recipe_id])
 		@step = Step.find(params[:id])
+		respond_to do |format|
+			format.js { render :new }
+		end
 	end
 
 	def update
@@ -50,10 +53,10 @@ class StepsController < ApplicationController
 	end
 
 	def destroy
-		@recipe = Recipe.includes(:steps).find(params[:recipe_id])
 		@step = Step.find(params[:id])
-		@recipe.reindex_steps(@step.step_order)
 		@step.destroy
+		@recipe = Recipe.includes(:steps).find(params[:recipe_id])
+		@recipe.reindex_steps(nil)
 		respond_to do |format|
 			format.js
 			format.html { redirect_to new_recipe_step_path(@recipe) }

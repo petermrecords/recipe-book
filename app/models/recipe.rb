@@ -20,11 +20,12 @@ class Recipe < ApplicationRecord
 	def reindex_steps(added_index)
 		index_counter = 1
 		steps.order(step_order: :asc, updated_at: :desc).each do |step|
-			debugger
 			index_counter += 1 if step.step_order == added_index
-			step.step_order = index_counter
+			if step.step_order != index_counter
+				step.step_order = index_counter
+				step.save
+			end
 			index_counter += 1
-			step.save
 		end
 	end
 

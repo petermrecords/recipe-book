@@ -1,0 +1,1 @@
+$("#step-list").html("<%= j render partial: 'list', locals: { steps: @recipe.steps.order(:step_order) } %>")
