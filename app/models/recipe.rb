@@ -28,5 +28,4 @@ class Recipe < ApplicationRecord
 			index_counter += 1
 		end
 	end
-
 end
