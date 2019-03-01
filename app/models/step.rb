@@ -11,7 +11,7 @@ class Step < ApplicationRecord
   validates :is_active, { inclusion: { in: [true, false] } }
   validates :instruction, { presence: true }
 
-  # prep time parser
+  # prep time helpers
   def parsed_prep_time
     parser = /\A(\d\d):(\d\d):(\d\d)\z/.match(prep_time)
     if parser[1] != "00"
@@ -29,6 +29,21 @@ class Step < ApplicationRecord
         value: parser[3].to_i,
         units: 'seconds'
       }
+    end
+  end
+
+  def display_prep_time
+    parsed_prep_time.values.join(' ')
+  end
+
+  def prep_time_in_seconds
+    case parsed_prep_time[:units]
+    when 'hours'
+      parsed_prep_time[:value] * 3600
+    when 'minutes'
+      parsed_prep_time[:value] * 60
+    else 
+      parsed_prep_time[:value]
     end
   end
 

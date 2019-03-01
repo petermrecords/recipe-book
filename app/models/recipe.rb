@@ -12,7 +12,32 @@ class Recipe < ApplicationRecord
 		less_than_or_equal_to: 12
 	} }
 
-	# step order-related helpers
+	# prep time helpers
+	def total_prep_time_in_seconds
+		steps.map { |s| s.prep_time_in_seconds }.inject(:+)
+	end
+
+	def active_prep_time_in_seconds
+		steps.where(is_active: true).map { |s| s.prep_time_in_seconds }.inject(:+)
+	end
+
+	def display_total_prep_time
+		if total_prep_time_in_seconds > 3600
+			"#{total_prep_time_in_seconds/3600} hours #{(total_prep_time_in_seconds.to_f/60.0).ceil} minutes"
+		else
+			"#{(total_prep_time_in_seconds.to_f/60.0).ceil} minutes"
+		end
+	end
+
+	def display_active_prep_time
+		if active_prep_time_in_seconds > 3600
+			"#{active_prep_time_in_seconds/3600} hours #{(active_prep_time_in_seconds.to_f/60.0).ceil} minutes"
+		else
+			"#{(active_prep_time_in_seconds.to_f/60.0).ceil} minutes"
+		end
+	end
+
+	# step order helpers
 	def next_step_index
 		steps.count + 1
 	end
