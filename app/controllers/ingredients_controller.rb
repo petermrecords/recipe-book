@@ -30,14 +30,11 @@ class IngredientsController < ApplicationController
 			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 			@ingredient = Ingredient.new
 			respond_to do |format|
-				format.js do
-					render :new
-				end
+				format.js { render :new }
 				format.html { redirect_to new_recipe_ingredient_path(@recipe) }
 			end
 		else
-			@errors = @ingredient.errors
-			byebug
+			@errors = @ingredient.errors.full_messages
 			@grocery_types = Grocery.grocery_types
 			@grocery_type = @ingredient.grocery ? @ingredient.grocery.grocery_type : @grocery_types.first
 			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
@@ -45,7 +42,7 @@ class IngredientsController < ApplicationController
 			@measurement_type = @ingredient.measurement ? @ingredient.measurement.measurement_type : @measurement_types.first
 			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 			respond_to do |format|
-				format.js { render :new }
+				format.js
 				format.html { render :new }
 			end
 		end
@@ -62,6 +59,7 @@ class IngredientsController < ApplicationController
 		@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 		respond_to do |format|
 			format.js { render :new }
+			format.html { render :new }
 		end
 	end
 
@@ -77,15 +75,20 @@ class IngredientsController < ApplicationController
 			@ingredient = Ingredient.new
 			@measurement_type = @measurement_types.first
 			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
+			respond_to do |format|
+				format.js { render :new }
+				format.html { redirect_to new_recipe_ingredient_path(@recipe) }
+			end
 		else
-			@errors = @ingredient.errors
+			@errors = @ingredient.errors.full_messages
 			@grocery_type = @ingredient.grocery.grocery_type
 			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
 			@measurement_type = @ingredient.measurement.measurement_type
 			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
-		end
-		respond_to do |format|
-			format.js { render :new }
+			respond_to do |format|
+				format.js { render :create }
+				format.html { render :new }
+			end
 		end
 	end
 
