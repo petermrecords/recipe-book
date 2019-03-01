@@ -13,6 +13,11 @@ class Step < ApplicationRecord
 
   # prep time helpers
   def parsed_prep_time
+  if /\A(\d+) (hours|minutes|seconds)\z/.match(prep_time)
+    {
+      value: 
+    }
+  else
     parser = /\A(\d\d):(\d\d):(\d\d)\z/.match(prep_time)
     if parser[1] != "00"
       {
