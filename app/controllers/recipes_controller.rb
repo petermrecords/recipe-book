@@ -23,6 +23,7 @@ class RecipesController < ApplicationController
 		if @recipe.save
 			redirect_to edit_recipe_path(@recipe)
 		else
+			@errors = @recipe.errors.full_messages
 			render :new
 		end
 	end
@@ -41,7 +42,11 @@ class RecipesController < ApplicationController
 		if @recipe.save
 			redirect_to edit_recipe_path(@recipe)
 		else
-			render :edit
+			@errors = @recipe.errors.full_messages
+			respond_to do |format|
+				format.html { render :edit }
+				format.js { render :edit }
+			end
 		end
 	end
 

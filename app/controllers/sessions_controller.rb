@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 		@admin = Admin.kept.find_by(email: params[:email])
 		if @admin && @admin.authenticate(params[:password])
 			session[:admin] = @admin.id
-			redirect_to new_admin_path
+			redirect_to admin_root_path
 		elsif @admin
 			flash[:notice] = 'Password is incorrect'
 			render :new

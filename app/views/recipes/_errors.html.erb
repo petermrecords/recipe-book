@@ -1,0 +1,13 @@
+<% if @errors %>
+	<div class='alert alert-danger alert-dismissable fade show' role='alert'>
+		<small><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+	    <span aria-hidden='true'><%= fa_icon 'times' %></span>
+	  </button>
+		<p><strong><%= fa_icon 'exclamation-circle' %> Your content could not be saved:</strong></p>
+		<ul>
+			<% @errors.each do |error| %>
+				<li><%= error %></li>
+			<% end %>
+		</ul></small>
+	</div>
+<% end %>

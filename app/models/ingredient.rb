@@ -31,7 +31,7 @@ class Ingredient < ApplicationRecord
 	end
 
 	def display_measurement
-		measurement_override ? measurement_override : measurement.abbreviation
+		measurement_override ? measurement_override.downcase : measurement.abbreviation
 	end
 
 	def display_comment
