@@ -10,6 +10,8 @@ class Step < ApplicationRecord
   }
   validates :is_active, { inclusion: { in: [true, false] } }
   validates :instruction, { presence: true }
+  # scopes
+  scope :active, -> { where(is_active: true) }
 
   # prep time helpers
   def parsed_prep_time
@@ -61,5 +63,10 @@ class Step < ApplicationRecord
   # callbacks 
   before_validation do |step|
   	step.instruction = step.instruction.strip
+  end
+
+  before_save do |step|
+    recipe.updated_at = DateTime.now
+    recipe.save
   end
 end

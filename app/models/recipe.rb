@@ -11,6 +11,9 @@ class Recipe < ApplicationRecord
 		greater_than_or_equal_to: 1,
 		less_than_or_equal_to: 12
 	} }
+	# scopes
+	scope :published, -> { where("published_at IS NULL") }
+	scope :unpublished, -> { where("published_at IS NOT NULL") }
 
 	# prep time helpers
 	def total_prep_time_in_seconds
@@ -18,7 +21,7 @@ class Recipe < ApplicationRecord
 	end
 
 	def active_prep_time_in_seconds
-		steps.where(is_active: true).map { |s| s.prep_time_in_seconds }.inject(:+)
+		steps.active.map { |s| s.prep_time_in_seconds }.inject(:+)
 	end
 
 	def display_total_prep_time

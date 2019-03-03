@@ -46,6 +46,8 @@ class Ingredient < ApplicationRecord
 	# callbacks
 	before_save do |ingredient|
 		measurement_override = nil if measurement.measurement_name != "Pieces"
+		recipe.updated_at = DateTime.now
+		recipe.save
 	end
 	# custom validation
 	def common_amounts_only
