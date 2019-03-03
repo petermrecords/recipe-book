@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
 		authorize_admin
 	end
 
-	before_action only: [:edit, :update, :destroy] do
+	before_action only: [:edit, :update, :destroy, :preview, :publish] do
 		authorize_recipe_owner(params[:id])
 	end
 
@@ -11,6 +11,7 @@ class RecipesController < ApplicationController
 	end
 
 	def show
+		@recipe = Recipe.includes(:steps, :ingredients).find(params[:id])
 	end
 
 	def new
@@ -51,6 +52,17 @@ class RecipesController < ApplicationController
 	end
 
 	def destroy
+		@recipe = Recipe.find(params[:id])
+	end
+
+	def preview
+		@recipe = Recipe.includes(:steps, :ingredients).find(params[:id])
+	end
+
+	def publish
+		@recipe = Recipe.find(params[:id])
+		@recipe.published_at = DateTime.now
+		@recipe.save
 	end
 
 	private

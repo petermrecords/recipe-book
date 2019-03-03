@@ -18,7 +18,7 @@ class Step < ApplicationRecord
     if /\A(\d+) (hours|minutes|seconds)\z/.match(prep_time)
       parser = /\A(\d+) (hours|minutes|seconds)\z/.match(prep_time)
       {
-        value: parser[1],
+        value: parser[1].to_i,
         units: parser[2]
       }
     elsif /\A(\d\d):(\d\d):(\d\d)\z/.match(prep_time)

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   	post '/login/', to: 'sessions#create'
   	delete '/login/', to: 'sessions#destroy'
 
+    put '/recipes/:id/publish', to: 'recipes#publish', as: 'recipe_publish'
+    patch '/recipes/:id/publish', to: 'recipes#publish'
+    get 'recipes/:id/preview', to: 'recipes#preview', as: 'recipe_preview'
   	resources :recipes, only: [:new, :create, :edit, :update, :destroy] do
       resources :ingredients, only: [:new, :create, :edit, :update, :destroy]
       resources :steps, only: [:new, :create, :edit, :update, :destroy]
