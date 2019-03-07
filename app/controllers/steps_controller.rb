@@ -27,7 +27,7 @@ class StepsController < ApplicationController
 		else
 			@errors = @step.errors.full_messages
 			respond_to do |format|
-				format.js
+				format.js { render :'recipes/errors' }
 				format.html { render :new }
 			end
 		end
@@ -59,7 +59,7 @@ class StepsController < ApplicationController
 		else
 			@errors = @step.errors.full_messages
 			respond_to do |format|
-				format.js { render :create }
+				format.js { render :'recipes/errors' }
 				format.html { render :new }
 			end
 		end

@@ -1,6 +1,8 @@
 <div class='container'>
   <h4>Steps So Far</h4>
   <ul class='list-unstyled wizard-list'>
-    <%= render steps %>
+    <% steps.each do |step| %>
+      <%= render partial: 'wizard_step', locals: { step: step } %>
+    <% end %>
   </ul>
 </div>

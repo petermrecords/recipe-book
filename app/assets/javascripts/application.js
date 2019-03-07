@@ -44,5 +44,4 @@ $(document).ready(function() {
 	$("#modal-anchor").on("hidden.bs.modal","#new-grocery-form", function(event) {
 		$("#modal-anchor").html("");
 	});
-
 });

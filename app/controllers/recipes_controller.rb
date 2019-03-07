@@ -46,7 +46,7 @@ class RecipesController < ApplicationController
 			@errors = @recipe.errors.full_messages
 			respond_to do |format|
 				format.html { render :edit }
-				format.js { render :edit }
+				format.js { render :'recipes/errors' }
 			end
 		end
 	end
@@ -57,6 +57,7 @@ class RecipesController < ApplicationController
 
 	def preview
 		@recipe = Recipe.includes(:steps, :ingredients).find(params[:id])
+		render :show
 	end
 
 	def publish

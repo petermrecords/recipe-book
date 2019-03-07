@@ -1,4 +1,4 @@
-<h4>Publish</h4>
+<h4 class='text-center'>Publish</h4>
 <%= link_to 'Shelve', new_recipe_path, button: true, class: 'btn btn-warning btn-block disabled' %>
 <% if @recipe.steps.any? && @recipe.ingredients.any? %>
 	<%= link_to 'Preview', recipe_preview_path(@recipe), button: true, class: 'btn btn-primary btn-block' %>

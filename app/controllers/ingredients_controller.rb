@@ -42,7 +42,7 @@ class IngredientsController < ApplicationController
 			@measurement_type = @ingredient.measurement ? @ingredient.measurement.measurement_type : @measurement_types.first
 			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 			respond_to do |format|
-				format.js
+				format.js { render :'recipes/errors' }
 				format.html { render :new }
 			end
 		end
@@ -86,7 +86,7 @@ class IngredientsController < ApplicationController
 			@measurement_type = @ingredient.measurement.measurement_type
 			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 			respond_to do |format|
-				format.js { render :create }
+				format.js { render :'recipes/errors' }
 				format.html { render :new }
 			end
 		end

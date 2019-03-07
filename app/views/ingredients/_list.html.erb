@@ -1,6 +1,8 @@
 <div class='container'>
 	<h4>Ingredients So Far</h4>
 	<ul class='list-unstyled ingredient-wizard-list'>
-		<%= render ingredients %>
+    <% ingredients.each do |ingredient| %>
+		  <%= render partial: 'wizard_ingredient', locals: { ingredient: ingredient } %>
+    <% end %>
 	</ul>
 </div>
