@@ -12,8 +12,8 @@ class Recipe < ApplicationRecord
 		less_than_or_equal_to: 12
 	} }
 	# scopes
-	scope :published, -> { where("published_at IS NULL") }
-	scope :unpublished, -> { where("published_at IS NOT NULL") }
+	scope :published, -> { where("published_at IS NOT NULL") }
+	scope :unpublished, -> { where("published_at IS NULL") }
 
 	# prep time helpers
 	def total_prep_time_in_seconds
@@ -42,6 +42,10 @@ class Recipe < ApplicationRecord
 		end
 	end
 
+	def published?
+		!!published_at
+	end
+
 	# step order helpers
 	def next_step_index
 		steps.count + 1
@@ -52,8 +56,7 @@ class Recipe < ApplicationRecord
 		steps.order(step_order: :asc, updated_at: :desc).each do |step|
 			index_counter += 1 if step.step_order == added_index
 			if step.step_order != index_counter
-				step.step_order = index_counter
-				step.save
+				step.update_attribute(step_order: index_counter)
 			end
 			index_counter += 1
 		end

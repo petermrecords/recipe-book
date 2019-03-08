@@ -1,0 +1,15 @@
+<div class='wizard-nav'>
+	<div class='container'>
+		<ul class='nav'>
+			<li class='nav-item'>
+				<%= link_to 'Description', edit_recipe_path(@recipe), remote: true, class: 'nav-link' %>
+			</li>
+			<li class='nav-item'>
+				<%= link_to 'Ingredients', new_recipe_ingredient_path(@recipe), remote: true, class: 'nav-link' %>
+			</li>
+			<li class='nav-item'>
+				<%= link_to 'Preparation', new_recipe_step_path(@recipe), remote: true, class: 'nav-link' %>
+			</li>
+		</ul>
+	</div>
+</div>

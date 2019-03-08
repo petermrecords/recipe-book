@@ -65,8 +65,7 @@ class Step < ApplicationRecord
   	step.instruction = step.instruction.strip
   end
 
-  before_save do |step|
-    recipe.updated_at = DateTime.now
-    recipe.save
+  after_save do |step|
+    recipe.update_attribute(updated_at: DateTime.now)
   end
 end

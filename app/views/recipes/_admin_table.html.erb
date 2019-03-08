@@ -1,0 +1,12 @@
+<table class='table table-hover'>
+  <tr class='row'>
+    <th scope='col' class='col-4'>Dish</th>
+    <th scope='col' class='col-2 text-center'>Published?</th>
+    <th scope='col' class='col-2'>Last Edited</th>
+    <th scope='col' class='col-2 text-center'>Ingredients</th>
+    <th scope='col' class='col-2 text-center'>Directions</th>
+  </tr>
+  <% @recipes.each do |recipe| %>
+    <%= render partial: 'admin_recipe', locals: { recipe: recipe } %>
+  <% end %>
+</table>

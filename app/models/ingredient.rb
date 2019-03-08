@@ -46,9 +46,12 @@ class Ingredient < ApplicationRecord
 	# callbacks
 	before_save do |ingredient|
 		measurement_override = nil if measurement.measurement_name != "Pieces"
-		recipe.updated_at = DateTime.now
-		recipe.save
 	end
+
+	after_save do |ingredient|
+		recipe.update_attribute(updated_at: DateTime.now)
+	end
+
 	# custom validation
 	def common_amounts_only
 		if !/\A\d*\/[1,2,3,4,8]\z/.match(amount.to_r.to_s)

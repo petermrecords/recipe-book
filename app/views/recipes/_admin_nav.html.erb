@@ -1,0 +1,20 @@
+<div class='admin-nav'>
+  <div class='container'>
+    <ul class='nav'>
+      <li class='nav-item'>
+        <%= link_to ((fa_icon 'plus') << ' New'), new_recipe_path, class: 'nav-link' %>
+      </li>
+      <li class='nav-item'>
+        <%= link_to 'Unpublished', admin_root_path, remote: true, class: 'nav-link' %>
+      </li>
+      <li class='nav-item'>
+        <%= link_to 'All', admin_root_path(published: true), remote: true, class: 'nav-link' %> 
+      </li>
+      <% if @current_admin.is_super_admin? %>
+        <li class='nav-item'>
+          <%= link_to 'Sitewide', admin_root_path(all: true), remote: true, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

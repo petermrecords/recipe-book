@@ -1,0 +1,14 @@
+<div class='row' id='admin-head'>
+  <div class='col-12'>
+    <h1><%= @current_admin.full_name %>'s Recipes</h1>
+    <p class='lead'>Click on one of your recipes below to edit it.</p>
+  </div>
+</div>
+<div class='row' id='admin-nav'>
+  <%= render partial: 'admin_nav' %>
+</div>
+<div class='row' id='admin-body'>
+  <div class='col-12' id='recipes-table'>
+    <%= render partial: 'admin_table' %>
+  </div>
+</div>

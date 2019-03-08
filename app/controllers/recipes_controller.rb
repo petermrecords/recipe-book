@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-	before_action only: [:new, :create] do
+	before_action only: [:new, :create, :admin] do
 		authorize_admin
 	end
 
@@ -64,6 +64,20 @@ class RecipesController < ApplicationController
 		@recipe = Recipe.find(params[:id])
 		@recipe.published_at = DateTime.now
 		@recipe.save
+	end
+
+	def admin
+		if params[:published]
+			@recipes = Recipe.where(author: current_admin).order(updated_at: :desc)
+		elsif params[:sitewite]
+			@recipes = Recipe.order(updated_at: :desc)
+		else
+			@recipes = Recipe.unpublished.where(author: current_admin).order(updated_at: :desc)
+		end
+		respond_to do |format|
+			format.js
+			format.html
+		end
 	end
 
 	private

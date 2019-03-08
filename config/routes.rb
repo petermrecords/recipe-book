@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :steps, only: [:new, :create, :edit, :update, :destroy]
     end
     resources :groceries, only: [:new, :create, :edit, :update, :destroy]
-    get '/', to: 'recipes#new', as: 'admin_root'
+    get '/', to: 'recipes#admin', as: 'admin_root'
   end
 
   get 'measurements/selectbox', to: 'measurements#selectbox'

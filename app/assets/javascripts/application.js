@@ -44,4 +44,17 @@ $(document).ready(function() {
 	$("#modal-anchor").on("hidden.bs.modal","#new-grocery-form", function(event) {
 		$("#modal-anchor").html("");
 	});
+
+	$("#admin-body").on("click",".admin-recipe-row", function(event) {
+		window.location.href = $(this).find("a").attr("href");
+	});
+
+	$("body").on("click",".link-unstyled", function(event) {
+		event.preventDefault();
+	});
+
+	$("body").on("click",".nav-link", function(event) {
+		$(this).parent().parent().find("li.nav-item a").removeClass("disabled");
+		$(this).addClass("disabled");
+	});
 });
