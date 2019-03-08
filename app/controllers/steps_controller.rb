@@ -16,7 +16,7 @@ class StepsController < ApplicationController
 		@recipe = Recipe.includes(:steps).find(params[:recipe_id])
 		@step = Step.new(step_params)
 		@step.prep_time = parse_prep_time(params[:step][:prep_time_value], params[:step][:prep_time_units])
-		@step.is_active = !!@step.is_active
+		@step.is_active = !!params[:step][:is_active]
 		if @step.save
 			@recipe.reindex_steps(@step.step_order)
 			@step = Step.new
@@ -47,10 +47,9 @@ class StepsController < ApplicationController
 		@step = Step.find(params[:id])
 		@step.update(step_params)
 		@step.prep_time = parse_prep_time(params[:step][:prep_time_value], params[:step][:prep_time_units])
-		@step.is_active = !!@step.is_active
-		@recipe.reindex_steps(@step.step_order)
+		@step.is_active = !!params[:step][:is_active]
 		if @step.save
-			@recipe.reindex_steps(@step.step_order) if @step.step_order != @recipe.next_step_index
+			@recipe.reindex_steps(nil)
 			@step = Step.new
 			respond_to do |format|
 				format.js { render :new }
@@ -78,7 +77,7 @@ class StepsController < ApplicationController
 
 	private
 	def step_params
-		params.require(:step).permit(:recipe_id, :step_order, :is_active, :instruction)
+		params.require(:step).permit(:recipe_id, :step_order, :instruction)
 	end
 
 	def parse_prep_time(value, units)

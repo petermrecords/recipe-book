@@ -8,8 +8,7 @@
 			<%= f.select :prep_time_units, [['Seconds','seconds'],['Minutes','minutes'],['Hours','hours']], wrapper: { class: 'col-3' }, selected: (@step && @step.parsed_prep_time ? @step.parsed_prep_time[:units] : nil) %>
 			<div class='col-3' id='active-check'>
 				<div class='custom-control custom-checkbox custom-control-inline'>
-			    <input type='checkbox' class='custom-control-input custom-control-inline' name='step[is_active]' id='step[is_active]' value="<%= @step && @step.is_active ? 1 : 0 %>">
-			    <label class='custom-control-label' for='step[is_active]'>Active?</label>
+					<%= f.check_box :is_active, label: "Active?", inline: true, custom: true %>
 			  </div>
 			</div>
 		</div>

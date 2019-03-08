@@ -84,3 +84,36 @@ body {
 		margin-top: 8px;
 	}
 }
+
+#recipe-image {
+	max-height: 300px;
+	max-width: 300px;
+}
+
+#recipe-head {
+	padding-bottom: 8px;
+	padding-top: 8px;
+	margin-bottom: 8px;
+	border-bottom: 1px dotted #BDC3C7;
+}
+
+#recipe-stats {
+	padding-top: 16px;
+	border-bottom: 1px dotted #BDC3C7;
+	margin-bottom: 8px;
+	dd, dt {
+		margin-bottom: 8px;
+		font-size: 0.8em;
+	}
+}
+
+#recipe-body {
+	h3 {
+		padding-bottom: 6px;
+		border-bottom: 1px dotted #BDC3C7;
+	}
+}
+
+#recipe-directions {
+	border-left: 1px dotted #BDC3C7;
+}

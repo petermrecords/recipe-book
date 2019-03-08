@@ -33,7 +33,9 @@ class Recipe < ApplicationRecord
 	end
 
 	def display_active_prep_time
-		if active_prep_time_in_seconds > 3600
+		if !active_prep_time_in_seconds
+			"None"
+		elsif active_prep_time_in_seconds > 3600
 			"#{active_prep_time_in_seconds/3600} hours #{(active_prep_time_in_seconds.to_f/60.0).ceil} minutes"
 		else
 			"#{(active_prep_time_in_seconds.to_f/60.0).ceil} minutes"
