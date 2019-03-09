@@ -6,6 +6,11 @@
   </div>
   <div class='col-8'>
     <h1><%= @recipe.dish_name %></h1>
+    <p id='recipe-byline'>
+      <span><%= @recipe.author.full_name %></span>
+      <span>&bull;</span>
+      <span><%= @recipe.published? ? @recipe.published_at.strftime("%B %-d, %Y") : 'Preview' %></span>
+    </p>
     <p><%= @recipe.description %></p>
   </div>
 </div>
