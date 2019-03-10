@@ -1,9 +1,0 @@
-<h4 class='text-center'>Publish</h4>
-<%= link_to 'Shelve', admin_root_path, button: true, class: 'btn btn-warning btn-block' %>
-<% if @recipe.steps.any? && @recipe.ingredients.any? %>
-	<%= link_to 'Preview', recipe_preview_path(@recipe), button: true, class: 'btn btn-primary btn-block' %>
-	<%= button_to 'Publish', recipe_publish_path(@recipe), method: :put, class: 'btn btn-danger btn-block', data: { confirm: 'Are you sure you are ready to publish this?' } %>
-<% else %>
-	<%= link_to 'Preview', recipe_preview_path(@recipe), button: true, class: 'btn btn-primary btn-block disabled' %>
-	<%= link_to 'Publish', recipe_publish_path(@recipe), method: :put, button: true, class: 'btn btn-danger btn-block disabled', data: { confirm: 'Are you sure you are ready to publish this?' } %>
-<% end %>

@@ -5,11 +5,11 @@
     </div>
   </div>
   <div class='col-8'>
-    <h1><%= @recipe.dish_name %></h1>
-    <p id='recipe-byline'>
+    <h1 id=recipe-title' class='text-red font-serif'><%= @recipe.dish_name %></h1>
+    <p id='recipe-byline' class='text-dark-purple font-serif'>
       <span><%= @recipe.author.full_name %></span>
       <span>&bull;</span>
-      <span><%= @recipe.published? ? @recipe.published_at.strftime("%B %-d, %Y") : 'Preview' %></span>
+      <span><%= @recipe.published? ? @recipe.published_at.strftime("%B %-d, %Y") : DateTime.now.strftime("%B %-d, %Y") %></span>
     </p>
     <p><%= @recipe.description %></p>
   </div>
@@ -17,24 +17,24 @@
 <div class='row' id='recipe-stats'>
   <div class='col-12'>
     <dl class='row'>
-      <dt class='col-2'>Serves:</dt>
+      <dt class='col-2 text-red font-serif'>Serves:</dt>
       <dd class='col-2 text-right'><%= @recipe.serves %></dd>
-      <dt class='col-2'>Total Prep Time:</dt>
+      <dt class='col-2 text-red font-serif'>Total Prep Time:</dt>
       <dd class='col-2 text-right'><%= @recipe.display_total_prep_time %></dd>
-      <dt class='col-2'>Active Prep Time:</dt>
+      <dt class='col-2 text-red font-serif'>Active Prep Time:</dt>
       <dd class='col-2 text-right'><%= @recipe.display_active_prep_time %></dd>
     </dl>
   </div>
 </div>
 <div class='row' id='recipe-body'>
   <div class='col-4' id='recipe-ingredients'>
-    <h3>Ingredients</h3>
+    <h3 class='text-dark-purple font-serif'>Ingredients</h3>
     <ul class='list-unstyled'>
       <%= render @recipe.ingredients %>
     </ul>
   </div>
   <div class='col-8' id='recipe-directions'>
-    <h3>Directions</h3>
+    <h3 class='font-serif text-dark-purple'>Instructions</h3>
     <ul class='list-unstyled'>
       <%= render @recipe.steps.order(step_order: :asc) %>
     </ul>

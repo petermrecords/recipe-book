@@ -25,7 +25,7 @@ class StepsController < ApplicationController
 				format.html { redirect_to new_recipe_step_path(@recipe) }
 			end
 		else
-			@errors = @step.errors.full_messages
+			@alert = errors_alert("Your content could not be saved:\r\n\r\n",@step.errors.full_messages)
 			respond_to do |format|
 				format.js { render :'recipes/errors' }
 				format.html { render :new }
@@ -56,7 +56,7 @@ class StepsController < ApplicationController
 				format.html { redirect_to new_recipe_step_path(@recipe) }
 			end
 		else
-			@errors = @step.errors.full_messages
+			@alert = errors_alert("Your content could not be saved:\r\n\r\n",@step.errors.full_messages)
 			respond_to do |format|
 				format.js { render :'recipes/errors' }
 				format.html { render :new }

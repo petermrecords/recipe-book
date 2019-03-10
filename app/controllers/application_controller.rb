@@ -41,4 +41,11 @@ class ApplicationController < ActionController::Base
 			redirect_to :back
 		end
 	end
+
+	def errors_alert(header, errors)
+		errors.each do |error|
+			header << "* " << error << "\r\n"
+		end
+		header
+	end
 end

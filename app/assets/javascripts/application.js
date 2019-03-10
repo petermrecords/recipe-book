@@ -54,7 +54,10 @@ $(document).ready(function() {
 	});
 
 	$("body").on("click",".nav-link", function(event) {
-		$(this).parent().parent().find("li.nav-item a").removeClass("disabled");
-		$(this).addClass("disabled");
+		debugger;
+		if (!($(this).hasClass("no-disable"))) {
+			$(this).parent().parent().find("li.nav-item a").removeClass("disabled");
+			$(this).addClass("disabled");
+		}
 	});
 });

@@ -17,15 +17,43 @@
 @import "rails_bootstrap_forms";
 @import "font-awesome";
 
+// fonts
+$font-serif: 'Crete Round', serif;
+
+// colors
+$red: #E74C3C;
+$dark-red: #B03A2E;
+$purple: #8E44AD;
+$dark-purple: #4A235A;
+
+
+
 body {
 	background-color: #FFFAF3;
 	font-family: 'Raleway', sans-serif;
+	a {
+		color: $purple;
+	}
+	a:hover {
+		color: $dark-purple;
+	}
+}
+
+.font-serif {
+	font-family: $font-serif;
+}
+
+.text-red {
+	color: $red;
+}
+
+.text-dark-purple {
+	color: $dark-purple;
 }
 
 #wizard-head {
 	min-height: 180px;
 	padding-top: 32px;
-	border-bottom: 3px solid #BDC3C7;
 }
 
 .wizard-content {
@@ -53,9 +81,6 @@ body {
 .wizard-nav {
 	padding-left: 4px;
 	padding-right: 4px;
-	a {
-		color: #48873D;
-	}
 }
 
 .wizard-list-item {
@@ -65,25 +90,11 @@ body {
 		font-family: 'Rock Salt', cursive;
 		font-size: 0.8em;
 	}
-	a {
-		color: #48873D;
-	}
 }
 
 #active-check {
 	padding-top: 32px;
 	padding-left: 16px;
-}
-
-#recipe-errors {
-	display: none;
-}
-
-#publish-section {
-	padding-bottom: 8px;
-	.btn {
-		margin-top: 8px;
-	}
 }
 
 #recipe-image {
@@ -96,11 +107,7 @@ body {
 	padding-top: 8px;
 	margin-bottom: 8px;
 	border-bottom: 1px dotted #BDC3C7;
-	h1 {
-		font-family: 'Crete Round', serif;
-	}
 	#recipe-byline {
-		font-family: 'Crete Round', serif;
 		font-size: 0.9em;
 	}
 }
@@ -118,8 +125,10 @@ body {
 #recipe-body {
 	h3 {
 		padding-bottom: 6px;
-		border-bottom: 1px dotted #BDC3C7;
-		font-family: 'Crete Round', serif;
+		border-bottom: 1px dotted $red;
+	}
+	.step-order {
+		font-size: 1.2em;
 	}
 }
 

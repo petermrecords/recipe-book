@@ -15,7 +15,7 @@ class Ingredient < ApplicationRecord
 	validates :measurement, {
 		presence: true
 	}
-	validates :amount, { presence: true, numericality: { greater_than: 0 } }
+	validates :amount, { numericality: { greater_than: 0 } }
 	validates :comment, { length: { maximum: 100 } }
 	validate :common_amounts_only
 

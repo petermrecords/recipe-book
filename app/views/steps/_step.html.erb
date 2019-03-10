@@ -1,1 +1,10 @@
-<li><p><strong><%= step.step_order %>.</strong> <%= step.instruction%></p></li>
+<li>
+	<p><strong class='step-order text-dark-purple font-serif'><%= step.step_order %>.</strong> <%= step.instruction%></p>
+	<p>
+		<% if step.is_active %>
+			<small class='text-dark-purple'><%= step.display_prep_time %></small>
+		<% else %>
+			<small class='text-muted'><%= step.display_prep_time %></small>
+		<% end %>
+	</p>
+</li>

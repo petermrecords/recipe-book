@@ -34,7 +34,7 @@ class IngredientsController < ApplicationController
 				format.html { redirect_to new_recipe_ingredient_path(@recipe) }
 			end
 		else
-			@errors = @ingredient.errors.full_messages
+			@alert = errors_alert("Your content could not be saved:\r\n\r\n",@ingredient.errors.full_messages)
 			@grocery_types = Grocery.grocery_types
 			@grocery_type = @ingredient.grocery ? @ingredient.grocery.grocery_type : @grocery_types.first
 			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
@@ -80,7 +80,7 @@ class IngredientsController < ApplicationController
 				format.html { redirect_to new_recipe_ingredient_path(@recipe) }
 			end
 		else
-			@errors = @ingredient.errors.full_messages
+			@alert = errors_alert("Your content could not be saved:\r\n\r\n",@ingredient.errors.full_messages)
 			@grocery_type = @ingredient.grocery.grocery_type
 			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
 			@measurement_type = @ingredient.measurement.measurement_type

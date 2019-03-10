@@ -8,7 +8,25 @@
 				<%= link_to 'Ingredients', new_recipe_ingredient_path(@recipe), remote: true, class: 'nav-link' %>
 			</li>
 			<li class='nav-item'>
-				<%= link_to 'Preparation', new_recipe_step_path(@recipe), remote: true, class: 'nav-link' %>
+				<%= link_to 'Instructions', new_recipe_step_path(@recipe), remote: true, class: 'nav-link' %>
+			</li>
+			<% if @recipe.steps.any? || @recipe.ingredients.any? %>
+				<li class='nav-item'>
+					<%= link_to 'Preview', recipe_preview_path(@recipe), class: 'nav-link no-disable'%>
+				</li>
+				<li class='nav-item'>
+					<%= link_to 'Publish', recipe_publish_path(@recipe), method: :put, data: { confirm: 'Are you sure you are ready to publish this?' }, class: 'nav-link no-disable' %>
+				</li>
+			<% else %>
+				<li class='nav-item'>
+					<%= link_to 'Preview', recipe_preview_path(@recipe), class: 'nav-link disabled' %>
+				</li>
+				<li class='nav-item'>
+					<%= link_to 'Publish', recipe_publish_path(@recipe), method: :put, data: { confirm: 'Are you sure you are ready to publish this?' }, class: 'nav-link disabled' %>
+				</li>
+			<% end %>
+			<li class='nav-item'>
+				<%= link_to 'Back', :back, class: 'nav-link no-disable' %>
 			</li>
 		</ul>
 	</div>

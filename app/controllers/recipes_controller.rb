@@ -43,7 +43,7 @@ class RecipesController < ApplicationController
 		if @recipe.save
 			redirect_to edit_recipe_path(@recipe)
 		else
-			@errors = @recipe.errors.full_messages
+			@alert = errors_alert("Your content could not be saved:\r\n\r\n",@recipe.errors.full_messages)
 			respond_to do |format|
 				format.html { render :edit }
 				format.js { render :'recipes/errors' }
