@@ -1,5 +1,5 @@
 <% if step != @step %>
-  <li class='wizard-list-item'>
+  <li class='wizard-list-item font-cursive'>
     <span class='wizard-list-display'><%= step.step_order.to_s << '.  ' << truncate(step.instruction, length: 20) %></span>
     <span class='float-right'>
       <%= link_to (fa_icon 'pencil'), edit_recipe_step_path(@recipe, step), remote: true %>
@@ -7,7 +7,7 @@
     </span>
   </li>
 <% else %>
-  <li class='wizard-list-item active'>
+  <li class='wizard-list-item font-cursive active'>
     <span class='wizard-list-display'><%= step.step_order.to_s << '.  ' << truncate(step.instruction, length: 20) %></span>
     <span class='float-right'>
       <%= fa_icon 'pencil' %>

@@ -1,11 +1,11 @@
 <div class='container wizard-content' id='recipe-form'>
-	<h4>Dish Description</h4>
+	<h4 class='font-cursive'>Dish Description</h4>
 	<%= bootstrap_form_for(@recipe, url: (!!@recipe.id ? recipe_path(@recipe) : recipes_path), inline_errors: false, remote: (!!@recipe.id)) do |f| %>
 		<div class='form-row'>
 			<%= f.text_field :dish_name, wrapper: { class: 'col-9' }, placeholder: 'Required' %>
 			<%= f.number_field :serves, wrapper: { class: 'col-3' }, in: 1..12, step: 1  %>
 		</div>
 		<%= f.text_area :description, rows: 8 %>
-		<%= f.submit 'Add Details', extra_class: 'btn-block' %>
+		<%= f.submit 'Add Details', extra_class: 'btn-block font-cursive background-light-teal text-black' %>
 	<% end %>
 </div>

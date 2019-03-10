@@ -1,5 +1,5 @@
 <div class='container' id='new-step-form'>
-	<h4>Add Instructions</h4>
+	<h4 class='font-cursive'>Add Instructions</h4>
 	<%= bootstrap_form_for(@step, url: (!!@step.id ? recipe_step_path(@recipe, @step) : recipe_steps_path(@recipe)), remote: true, inline_errors: false) do |f| %>
 		<%= f.hidden_field :recipe_id, value: @recipe.id %>
 		<div class='form-row'>
@@ -13,6 +13,6 @@
 			</div>
 		</div>
 		<%= f.text_area :instruction, rows: 8 %>
-		<%= f.submit 'Update Steps', extra_class: 'btn-block' %>
+		<%= f.submit 'Update Instructions', extra_class: 'btn-block background-teal text-black font-cursive' %>
 	<% end %>
 </div>

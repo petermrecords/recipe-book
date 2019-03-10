@@ -1,4 +1,4 @@
-<div class='row' id='recipe-head'>
+<div class='row head-row' id='recipe-head'>
   <div class='col-4'>
     <div id='recipe-image'>
       <%= image_tag 'placeholder.jpg', class: 'img-fluid' %>
@@ -6,7 +6,7 @@
   </div>
   <div class='col-8'>
     <h1 id=recipe-title' class='text-red font-serif'><%= @recipe.dish_name %></h1>
-    <p id='recipe-byline' class='text-dark-purple font-serif'>
+    <p id='recipe-byline' class='text-dark-red font-serif'>
       <span><%= @recipe.author.full_name %></span>
       <span>&bull;</span>
       <span><%= @recipe.published? ? @recipe.published_at.strftime("%B %-d, %Y") : DateTime.now.strftime("%B %-d, %Y") %></span>
@@ -17,24 +17,24 @@
 <div class='row' id='recipe-stats'>
   <div class='col-12'>
     <dl class='row'>
-      <dt class='col-2 text-red font-serif'>Serves:</dt>
+      <dt class='col-2 text-dark-red font-serif'>Serves:</dt>
       <dd class='col-2 text-right'><%= @recipe.serves %></dd>
-      <dt class='col-2 text-red font-serif'>Total Prep Time:</dt>
+      <dt class='col-2 text-dark-red font-serif'>Total Prep Time:</dt>
       <dd class='col-2 text-right'><%= @recipe.display_total_prep_time %></dd>
-      <dt class='col-2 text-red font-serif'>Active Prep Time:</dt>
+      <dt class='col-2 text-dark-red font-serif'>Active Prep Time:</dt>
       <dd class='col-2 text-right'><%= @recipe.display_active_prep_time %></dd>
     </dl>
   </div>
 </div>
 <div class='row' id='recipe-body'>
   <div class='col-4' id='recipe-ingredients'>
-    <h3 class='text-dark-purple font-serif'>Ingredients</h3>
+    <h3 class='text-red font-serif'>Ingredients</h3>
     <ul class='list-unstyled'>
       <%= render @recipe.ingredients %>
     </ul>
   </div>
   <div class='col-8' id='recipe-directions'>
-    <h3 class='font-serif text-dark-purple'>Instructions</h3>
+    <h3 class='font-serif text-red'>Instructions</h3>
     <ul class='list-unstyled'>
       <%= render @recipe.steps.order(step_order: :asc) %>
     </ul>

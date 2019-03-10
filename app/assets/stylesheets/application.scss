@@ -19,43 +19,151 @@
 
 // fonts
 $font-serif: 'Crete Round', serif;
-
+$font-cursive-head: 'Permanent Marker', cursive;
+$font-cursive-body: 'Rock Salt', cursive;
 // colors
+$light-red: #EC7063;
 $red: #E74C3C;
 $dark-red: #B03A2E;
-$purple: #8E44AD;
-$dark-purple: #4A235A;
 
+$light-teal: #76D7C4;
+$teal: #48C9B0;
+$dark-teal: #138D75;
 
+$white: #FFFFFF;
+$light-grey: #D3D3D3;
+$grey: #A9A9A9;
+$dark-grey: #808080;
+$black: #000000;
 
+// global
 body {
 	background-color: #FFFAF3;
 	font-family: 'Raleway', sans-serif;
 	a {
-		color: $purple;
+		color: $teal;
 	}
-	a:hover {
-		color: $dark-purple;
+	a:hover, a:link {
+		color: $dark-teal;
+	}
+	a.text-red:hover, a.text-red:link {
+		color: $dark-red;
+	}
+	.link-unstyled, .link-unstyled:link, .link-unstyled:hover {
+	  color: inherit;
+	  text-decoration: inherit;
+	}
+	.head-row {
+		padding-top: 32px;
+		padding-bottom: 32px;
 	}
 }
 
+// helper classes
 .font-serif {
 	font-family: $font-serif;
+}
+
+.font-cursive {
+	font-family: $font-cursive-body;
+}
+
+h1.font-cursive, h2.font-cursive,
+h3.font-cursive, h4.font-cursive,
+h5.font-cursive, h6.font-cursive,
+button.font-cursive {
+	font-family: $font-cursive-head;
+}
+
+.text-light-red {
+	color: $light-red;
 }
 
 .text-red {
 	color: $red;
 }
 
-.text-dark-purple {
-	color: $dark-purple;
+.text-dark-red {
+	color: $dark-red;
 }
 
-#wizard-head {
-	min-height: 180px;
-	padding-top: 32px;
+.text-light-teal {
+	color: $light-teal;
 }
 
+.text-teal {
+	color: $teal;
+}
+
+.text-dark-teal {
+	color: $dark-teal;
+}
+
+.text-white {
+	color: $white;
+}
+
+.text-light-grey {
+	color: $light-grey;
+}
+
+.text-grey {
+	color: $grey;
+}
+
+.text-dark-grey {
+	color: $dark-grey;
+}
+
+.text-black {
+	color: $black;
+}
+
+.background-light-red {
+	background: $light-red;
+}
+
+.background-red {
+	background: $red;
+}
+
+.background-dark-red {
+	background: $dark-red;
+}
+
+.background-light-teal {
+	background: $light-teal;
+}
+
+.background-teal {
+	background: $teal;
+}
+
+.background-dark-teal {
+	background: $dark-teal;
+}
+
+.background-white {
+	background: $white;
+}
+
+.background-light-grey {
+	background: $light-grey;
+}
+
+.background-grey {
+	background: $grey;
+}
+
+.background-dark-grey {
+	background: $dark-grey;
+}
+
+.background-black {
+	background: $black;
+}
+
+// components
 .wizard-content {
 	padding: 32px;
 	border: 3px solid #BDC3C7;
@@ -64,17 +172,9 @@ body {
 	margin-right: 16px;
 	min-height: 480px;
 	background: #EDE3D3;
-	h4 {
-		font-family: 'Permanent Marker', cursive;
-	}
 	label {
-		font-family: 'Rock Salt', cursive;
+		font-family: $font-cursive-body;
 		font-size: 0.8em;
-	}
-	.btn {
-		background: #48873D;
-		font-family: 'Permanent Marker', cursive;
-		color: black;
 	}
 }
 
@@ -87,14 +187,12 @@ body {
 	width: 100%;
 	border-bottom: 1px dotted #BDC3C7;
 	.wizard-list-display {
-		font-family: 'Rock Salt', cursive;
 		font-size: 0.8em;
 	}
 }
 
 #active-check {
 	padding-top: 32px;
-	padding-left: 16px;
 }
 
 #recipe-image {
@@ -103,8 +201,6 @@ body {
 }
 
 #recipe-head {
-	padding-bottom: 8px;
-	padding-top: 8px;
 	margin-bottom: 8px;
 	border-bottom: 1px dotted #BDC3C7;
 	#recipe-byline {
@@ -125,7 +221,7 @@ body {
 #recipe-body {
 	h3 {
 		padding-bottom: 6px;
-		border-bottom: 1px dotted $red;
+		border-bottom: 1px dotted $teal;
 	}
 	.step-order {
 		font-size: 1.2em;
@@ -133,10 +229,5 @@ body {
 }
 
 #recipe-directions {
-	border-left: 1px dotted #BDC3C7;
-}
-
-.link-unstyled, .link-unstyled:link, .link-unstyled:hover {
-  color: inherit;
-  text-decoration: inherit;
+	border-left: 1px dotted $teal;
 }
