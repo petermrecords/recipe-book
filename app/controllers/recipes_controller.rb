@@ -1,10 +1,12 @@
 class RecipesController < ApplicationController
 	before_action only: [:new, :create, :admin] do
 		authorize_admin
+		@navbar = 'admin_navbar'
 	end
 
 	before_action only: [:edit, :update, :destroy, :preview, :publish] do
 		authorize_recipe_owner(params[:id])
+		@navbar = 'admin_navbar'
 	end
 
 	def index

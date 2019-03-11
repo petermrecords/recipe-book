@@ -1,6 +1,7 @@
 class AdminsController < ApplicationController
 	before_action only: [:new, :create] do
 		authorize_super_admin
+		@navbar = 'admin_navbar'
 	end
 
 	before_action only: [:edit, :update, :destroy] do

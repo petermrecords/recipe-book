@@ -1,4 +1,8 @@
 class SessionsController < ApplicationController
+	before_action do
+		@navbar = 'login_navbar'
+	end
+
 	def new
 	end
 

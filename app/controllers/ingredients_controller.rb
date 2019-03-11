@@ -1,6 +1,7 @@
 class IngredientsController < ApplicationController
 	before_action do
 		authorize_recipe_owner(params[:recipe_id])
+		@navbar = 'admin_navbar'
 	end
 
 	def new

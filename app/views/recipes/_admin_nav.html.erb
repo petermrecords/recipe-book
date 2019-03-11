@@ -2,7 +2,7 @@
   <div class='container'>
     <ul class='nav'>
       <li class='nav-item'>
-        <%= link_to ((fa_icon 'plus') << ' New'), new_recipe_path, class: 'nav-link no-disable' %>
+        <%= link_to ((icon('fa', 'plus')) << ' New'), new_recipe_path, class: 'nav-link no-disable' %>
       </li>
       <li class='nav-item'>
         <%= link_to 'Unpublished', admin_root_path, remote: true, class: 'nav-link' %>
