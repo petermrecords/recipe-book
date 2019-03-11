@@ -2,14 +2,11 @@ class Step < ApplicationRecord
 	# associations
 	belongs_to :recipe
 	# validations
-  validates :recipe, { presence: true }
-  validates :step_order, { presence: true, numericality: { greater_than_or_equal_to: 1 } }
-  validates :prep_time, { 
-    presence: true,
-    format: { with: /(\A\d+ (hours|minutes|seconds)\z|\A\d\d:\d\d:\d\d\z)/, message: 'must be a positive whole number' }
-  }
-  validates :is_active, { inclusion: { in: [true, false] } }
-  validates :instruction, { presence: true }
+  validates :recipe, presence: { message: 'must be assigned' }
+  validates :step_order, numericality: { greater_than_or_equal_to: 1, message: 'must be a positive number whole number' }
+  validates :prep_time, format: { with: /(\A\d+ (hours|minutes|seconds)\z|\A\d\d:\d\d:\d\d\z)/, message: 'must be a positive whole number' }
+  validates :is_active, inclusion: { in: [true, false], message: 'must be assigned a value' }
+  validates :instruction, presence: { message: 'cannot be blank' }
   # scopes
   scope :active, -> { where(is_active: true) }
 

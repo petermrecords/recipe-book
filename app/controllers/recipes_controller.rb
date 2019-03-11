@@ -4,9 +4,14 @@ class RecipesController < ApplicationController
 		@navbar = 'admin_navbar'
 	end
 
-	before_action only: [:edit, :update, :destroy, :preview, :publish] do
+	before_action only: [:edit, :update, :destroy, :publish] do
 		authorize_recipe_owner(params[:id])
 		@navbar = 'admin_navbar'
+	end
+
+	before_action only: [:preview] do
+		authorize_recipe_owner(params[:id])
+		@navbar = 'preview_navbar'
 	end
 
 	def index
@@ -59,6 +64,8 @@ class RecipesController < ApplicationController
 
 	def destroy
 		@recipe = Recipe.find(params[:id])
+		@recipe.destroy
+		redirect_to admin_root_path
 	end
 
 	def preview
@@ -69,14 +76,24 @@ class RecipesController < ApplicationController
 	def publish
 		@recipe = Recipe.find(params[:id])
 		@recipe.published_at = DateTime.now
-		@recipe.save
+		if @recipe.save(context: :publish)
+			respond_to do |format|
+				format.js
+				format.html { redirect_to admin_root_path }
+			end
+		else
+			@alert = errors_alert("Your content could not be saved:\r\n\r\n",@recipe.errors.messages)
+			respond_to do |format|
+				format.js { render :'recipes/errors' }
+			end
+		end
 	end
 
 	def admin
 		if params[:published]
 			@recipes = Recipe.where(author: current_admin).order(updated_at: :desc)
-		elsif params[:sitewide]
-			@recipes = Recipe.order(updated_at: :desc)
+		elsif params[:all]
+			@recipes = Recipe.all.order(updated_at: :desc)
 		else
 			@recipes = Recipe.unpublished.where(author: current_admin).order(updated_at: :desc)
 		end

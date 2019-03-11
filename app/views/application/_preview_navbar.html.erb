@@ -1,0 +1,13 @@
+<nav class='navbar navbar-expand-md fixed-top background-dark-red'>
+  <%= link_to 'My Recipe Site', root_path, class: 'navbar-brand font-serif text-white' %>
+  <span class='navbar-text text-white'><small><em>You are viewing this recipe in preview mode.</em></small></span>
+  <button class='navbar-toggler navbar-toggler-right' type='button' data-toggle='collapse' data-target='#navbar-supported-content'>
+    <%= icon('fa', 'chevron-down', class: 'text-white') %>
+  </button>
+  <div class='collapse navbar-collapse' id='navbar-supported-content'>
+    <ul class='navbar-nav'>
+      <li class='nav-item'><%= link_to (icon('fas','check-circle') << ' Publish'), recipe_publish_path(@recipe), class: 'nav-link text-white' %></li>
+      <li class='nav-item'><%= link_to 'Go Back', :back, class: 'nav-link text-white' %></li>
+    </ul>
+  </div>
+</nav>

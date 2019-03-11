@@ -5,10 +5,9 @@ class Grocery < ApplicationRecord
 	has_many :ingredients
 	# validations
 	validates :grocery_type, { 
-		presence: true,
-		inclusion: { in: self::GROCERY_TYPES }
+		inclusion: { in: self::GROCERY_TYPES, message: 'must be assigned a recognized type' }
 	}
-	validates :grocery_name, { presence: true }
+	validates :grocery_name, presence: { message: 'cannot be blank' }
 	validate :name_uniqueness_validation
 
 	private

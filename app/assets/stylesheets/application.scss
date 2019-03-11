@@ -51,6 +51,12 @@ body {
 	a.text-red:hover, a.text-red:link {
 		color: $dark-red;
 	}
+	a.text-grey:hover, a.text-grey:link {
+		color: $dark-grey;
+	}
+	a.text-white:hover, a.text-white:link {
+		color: $light-grey;
+	}
 	.link-unstyled, .link-unstyled:link, .link-unstyled:hover {
 	  color: inherit;
 	  text-decoration: inherit;
@@ -58,6 +64,9 @@ body {
 	.head-row {
 		padding-top: 32px;
 		padding-bottom: 32px;
+	}
+	.navbar-text {
+		margin-right: 12px;
 	}
 }
 

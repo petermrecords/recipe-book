@@ -9,7 +9,7 @@
 	<div class='input-group'>
 		<div class='input-group-prepend'>
 			<div class='input-group-text'>
-				<%= link_to (fa_icon 'plus'), new_grocery_path(grocery_type: @grocery_type), remote: true %>
+				<%= link_to icon('fa', 'plus'), new_grocery_path(grocery_type: @grocery_type), remote: true %>
 			</div>
 		</div>
 		<select class='form-control' name='ingredient[grocery_id]' id='ingredient_grocery_id'>
@@ -22,5 +22,4 @@
 			<% end %>
 		</select>
 	</div>
-	<small class='form-text text-muted'>Browse by type and pick an ingredient.</small>
 </div>

@@ -3,17 +3,17 @@ class Recipe < ApplicationRecord
 	RECIPE_ROLES = ['Small Bite','Beverage','Meat','Poultry','Seafood','Vegetable','Side Dish','Dessert']
 	# associations
 	belongs_to :author, class_name: 'Admin', foreign_key: :admin_id
-	has_many :ingredients
+	has_many :ingredients, dependent: :destroy
 	has_many :groceries, through: :ingredients
-	has_many :steps
+	has_many :steps, dependent: :destroy
 	# validations
-	validates :dish_name, { presence: true, uniqueness: true }
-	validates :author, { presence: true }
-	validates :serves, { presence: true, numericality: {
-		greater_than_or_equal_to: 1,
-		less_than_or_equal_to: 12
-	} }
-	validates :dish_role, { presence: true, inclusion: { in: self::RECIPE_ROLES } }
+	validates :dish_name, { presence: { message: 'cannot be blank' } , uniqueness: true }
+	validates :author, presence: { message: 'cannot be blank' }
+	validates :serves, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 12, message: 'must be a number between 1 and 12' }
+	validates :dish_role, inclusion: { in: self::RECIPE_ROLES , message: 'must be assigned a recognized role' }
+
+	validates :ingredients, presence: { message: 'must have at least one ingredient', on: :publish }
+	validates :steps, presence: { message: 'must have at least one step in its directions', on: :publish }
 	# scopes
 	scope :published, -> { where("published_at IS NOT NULL") }
 	scope :unpublished, -> { where("published_at IS NULL") }
@@ -73,7 +73,7 @@ class Recipe < ApplicationRecord
 
 	# step order helpers
 	def next_step_index
-		instructions.count + 1
+		steps.count + 1
 	end
 
 	def reindex_steps(added_index)

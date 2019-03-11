@@ -4,19 +4,14 @@ class Ingredient < ApplicationRecord
 	belongs_to :grocery
 	belongs_to :recipe
 	# validations
-	validates :recipe, {
-		uniqueness: { scope: :grocery },
-		presence: true
+	validates :recipe, presence: { message: 'must be assigned' }
+	validates :grocery, { 
+		uniqueness: { scope: :recipe , message: 'is already an ingredient of this recipe' }, 
+		presence: { message: 'must be assigned' }
 	}
-	validates :grocery, {
-		uniqueness: { scope: :recipe },
-		presence: true
-	}
-	validates :measurement, {
-		presence: true
-	}
-	validates :amount, { numericality: { greater_than: 0 } }
-	validates :comment, { length: { maximum: 100 } }
+	validates :measurement, presence: { message: 'must be assigned' }
+	validates :amount, numericality: { greater_than: 0 , message: 'must be a whole number or fraction with denominator 2,3,4 or 8' }
+	validates :comment, length: { maximum: 100 }
 	validate :common_amounts_only
 
 	# display helpers
