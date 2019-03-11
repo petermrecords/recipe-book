@@ -1,4 +1,6 @@
 class Recipe < ApplicationRecord
+	# roles - constant list
+	RECIPE_ROLES = ['Small Bite','Beverage','Meat','Poultry','Seafood','Vegetable','Side Dish','Dessert']
 	# associations
 	belongs_to :author, class_name: 'Admin', foreign_key: :admin_id
 	has_many :ingredients
@@ -11,6 +13,7 @@ class Recipe < ApplicationRecord
 		greater_than_or_equal_to: 1,
 		less_than_or_equal_to: 12
 	} }
+	validates :dish_role, { presence: true, inclusion: { in: self::RECIPE_ROLES } }
 	# scopes
 	scope :published, -> { where("published_at IS NOT NULL") }
 	scope :unpublished, -> { where("published_at IS NULL") }
@@ -42,13 +45,35 @@ class Recipe < ApplicationRecord
 		end
 	end
 
+	# role helper for icons
+	def dish_role_as_icon
+		case dish_role
+		when 'Small Bite'
+			'hotdog'
+		when 'Beverage'
+			'glass-martini-alt'
+		when 'Meat'
+			'hippo'
+		when 'Poultry'
+			'drumstick-bite'
+		when 'Seafood'
+			'fish'
+		when 'Vegetable'
+			'seedling'
+		when 'Side Dish'
+			'mortar-pestle'
+		when 'Dessert'
+			'cookie-bite'
+		end
+	end
+
 	def published?
 		!!published_at
 	end
 
 	# step order helpers
 	def next_step_index
-		steps.count + 1
+		instructions.count + 1
 	end
 
 	def reindex_steps(added_index)

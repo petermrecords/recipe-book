@@ -5,8 +5,10 @@
     </div>
   </div>
   <div class='col-8'>
-    <h1 id=recipe-title' class='text-red font-serif'><%= @recipe.dish_name %></h1>
+    <h1 id=recipe-title' class='text-red font-serif'><%= icon('fas', @recipe.dish_role_as_icon, class: 'text-dark-teal') %> <%= @recipe.dish_name %></h1>
     <p id='recipe-byline' class='text-dark-red font-serif'>
+      <span><%= @recipe.dish_role %></span>
+      <span>&bull;</span>
       <span><%= @recipe.author.full_name %></span>
       <span>&bull;</span>
       <span><%= @recipe.published? ? @recipe.published_at.strftime("%B %-d, %Y") : DateTime.now.strftime("%B %-d, %Y") %></span>

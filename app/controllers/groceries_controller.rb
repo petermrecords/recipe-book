@@ -11,7 +11,7 @@ class GroceriesController < ApplicationController
 
 	def new
 		@grocery = Grocery.new
-		@grocery_types = Grocery.grocery_types
+		@grocery_types = Grocery::GROCERY_TYPES
 		@grocery_type = params[:grocery_type]
 		respond_to do |format|
 			format.js
@@ -20,7 +20,7 @@ class GroceriesController < ApplicationController
 
 	def create
 		@grocery = Grocery.new(grocery_params)
-		@grocery_types = Grocery.grocery_types
+		@grocery_types = Grocery::GROCERY_TYPES
 		@grocery_type = params[:grocery][:grocery_type]
 		if @grocery.save
 			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
@@ -45,7 +45,7 @@ class GroceriesController < ApplicationController
 	end
 
 	def selectbox
-		@grocery_types = Grocery.grocery_types
+		@grocery_types = Grocery::GROCERY_TYPES
 		@grocery_type = params[:grocery_type]
 		@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
 		respond_to do |format|

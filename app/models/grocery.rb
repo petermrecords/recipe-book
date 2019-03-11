@@ -1,18 +1,15 @@
 class Grocery < ApplicationRecord
-	@grocery_types = ['Fruit','Vegetables','Meat','Poultry','Seafood','Bakery','Dairy','Canned Goods','Dry Goods','Frozen Goods','Seasonings','Fats & Oils','Liquids']
+	# types - constant list
+	GROCERY_TYPES = ['Fruit','Vegetables','Meat','Poultry','Seafood','Bakery','Dairy','Canned Goods','Dry Goods','Frozen Goods','Seasonings','Fats & Oils','Liquids']
 	# associations
 	has_many :ingredients
 	# validations
 	validates :grocery_type, { 
 		presence: true,
-		inclusion: { in: @grocery_types }
+		inclusion: { in: self::GROCERY_TYPES }
 	}
 	validates :grocery_name, { presence: true }
 	validate :name_uniqueness_validation
-	# type helper
-	def self.grocery_types
-		@grocery_types
-	end
 
 	private
 	# custom validations

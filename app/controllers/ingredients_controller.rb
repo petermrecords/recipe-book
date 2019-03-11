@@ -5,7 +5,7 @@ class IngredientsController < ApplicationController
 
 	def new
 		@recipe = Recipe.includes(:ingredients).find(params[:recipe_id])
-		@grocery_types = Grocery.grocery_types
+		@grocery_types = Grocery::GROCERY_TYPES
 		@grocery_type = @grocery_types.first
 		@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
 		@measurement_types = Measurement.measurement_types
@@ -22,7 +22,7 @@ class IngredientsController < ApplicationController
 		@ingredient = Ingredient.new(ingredient_params)
 		if @ingredient.save
 			@recipe = Recipe.includes(:ingredients).find(params[:recipe_id])
-			@grocery_types = Grocery.grocery_types
+			@grocery_types = Grocery::GROCERY_TYPES
 			@grocery_type = @grocery_types.first
 			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
 			@measurement_types = Measurement.measurement_types
@@ -35,12 +35,6 @@ class IngredientsController < ApplicationController
 			end
 		else
 			@alert = errors_alert("Your content could not be saved:\r\n\r\n",@ingredient.errors.full_messages)
-			@grocery_types = Grocery.grocery_types
-			@grocery_type = @ingredient.grocery ? @ingredient.grocery.grocery_type : @grocery_types.first
-			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
-			@measurement_types = Measurement.measurement_types
-			@measurement_type = @ingredient.measurement ? @ingredient.measurement.measurement_type : @measurement_types.first
-			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 			respond_to do |format|
 				format.js { render :'recipes/errors' }
 				format.html { render :new }
@@ -51,7 +45,7 @@ class IngredientsController < ApplicationController
 	def edit
 		@ingredient = Ingredient.find(params[:id])
 		@recipe = @ingredient.recipe
-		@grocery_types = Grocery.grocery_types
+		@grocery_types = Grocery::GROCERY_TYPES
 		@grocery_type = @ingredient.grocery.grocery_type
 		@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
 		@measurement_types = Measurement.measurement_types
@@ -66,7 +60,7 @@ class IngredientsController < ApplicationController
 	def update
 		@ingredient = Ingredient.find(params[:id])
 		@recipe = @ingredient.recipe
-		@grocery_types = Grocery.grocery_types
+		@grocery_types = Grocery::GROCERY_TYPES
 		@measurement_types = Measurement.measurement_types
 		@ingredient.update(ingredient_params)
 		if @ingredient.save
@@ -81,10 +75,6 @@ class IngredientsController < ApplicationController
 			end
 		else
 			@alert = errors_alert("Your content could not be saved:\r\n\r\n",@ingredient.errors.full_messages)
-			@grocery_type = @ingredient.grocery.grocery_type
-			@groceries = Grocery.where(grocery_type: @grocery_type).order(:grocery_name).pluck(:grocery_name, :id)
-			@measurement_type = @ingredient.measurement.measurement_type
-			@measurements = Measurement.where(measurement_type: @measurement_type).order(:measurement_type, :measurement_name).pluck(:measurement_name, :id)
 			respond_to do |format|
 				format.js { render :'recipes/errors' }
 				format.html { render :new }

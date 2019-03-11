@@ -16,10 +16,12 @@ class RecipesController < ApplicationController
 
 	def new
 		@recipe = Recipe.new
+		@recipe_roles = Recipe::RECIPE_ROLES
 	end
 
 	def create
 		@recipe = Recipe.new(recipe_params)
+		@recipe_roles = Recipe::RECIPE_ROLES
 		@recipe.author = current_admin
 		if @recipe.save
 			redirect_to edit_recipe_path(@recipe)
@@ -31,6 +33,7 @@ class RecipesController < ApplicationController
 
 	def edit
 		@recipe = Recipe.find(params[:id])
+		@recipe_roles = Recipe::RECIPE_ROLES
 		respond_to do |format|
 			format.js
 			format.html
@@ -39,6 +42,7 @@ class RecipesController < ApplicationController
 
 	def update
 		@recipe = Recipe.find(params[:id])
+		@recipe_roles = Recipe::RECIPE_ROLES
 		@recipe.update(recipe_params)
 		if @recipe.save
 			redirect_to edit_recipe_path(@recipe)
@@ -69,7 +73,7 @@ class RecipesController < ApplicationController
 	def admin
 		if params[:published]
 			@recipes = Recipe.where(author: current_admin).order(updated_at: :desc)
-		elsif params[:sitewite]
+		elsif params[:sitewide]
 			@recipes = Recipe.order(updated_at: :desc)
 		else
 			@recipes = Recipe.unpublished.where(author: current_admin).order(updated_at: :desc)
@@ -82,6 +86,6 @@ class RecipesController < ApplicationController
 
 	private
 	def recipe_params
-		params.require(:recipe).permit(:dish_name, :description, :serves)
+		params.require(:recipe).permit(:dish_name, :dish_role, :description, :serves)
 	end
 end

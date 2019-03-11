@@ -40,7 +40,7 @@ gem 'dotenv-rails'
 gem 'discard', '~> 1.0'
 gem 'bootstrap_form', '>=4.1.0'
 gem 'seedbank'
-gem 'font-awesome-rails'
+gem 'font-awesome-sass', '~> 5.6.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
