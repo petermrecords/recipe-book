@@ -1,0 +1,14 @@
+<div class='row head-row' id='users-head'>
+	<div class='col-12'>
+		<h1 class='text-red font-serif'><%= icon('fa', 'id-badge', class: 'text-dark-teal') %> User Management</h1>
+		<p class='lead'>Click a user below to edit or delete their account.</p>
+	</div>
+</div>
+<div class='row' id='users-nav'>
+	<%= render partial: 'nav' %>
+</div>
+<div class='row' id='users-body'>
+	<div class='col-12' id='users-table'>
+		<%= render partial: 'table' %>
+	</div>
+</div>

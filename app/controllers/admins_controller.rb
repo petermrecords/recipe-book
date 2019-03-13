@@ -1,11 +1,16 @@
 class AdminsController < ApplicationController
-	before_action only: [:new, :create] do
+	before_action only: [:new, :create, :index] do
 		authorize_super_admin
 		@navbar = 'admin_navbar'
 	end
 
 	before_action only: [:edit, :update, :destroy] do
 		authorize_account_owner
+		@navbar = 'admin_navbar'
+	end
+
+	def index
+		@admins = Admin.all.order(first_name: :desc, last_name: :desc)
 	end
 
 	def new

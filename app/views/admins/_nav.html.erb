@@ -1,0 +1,12 @@
+<div class='admin-nav'>
+	<div class='container'>
+		<ul class='nav'>
+			<li class='nav-item'>
+				<%= link_to (icon('fa','plus') << ' New'), new_admin_path, class: 'nav-link no-disable' %>
+			</li>
+			<li class='nav-item'>
+				<%= link_to 'Your Account', edit_admin_path(@current_admin), class: 'nav-link no-disable' %>
+			</li>
+		</ul>
+	</div>
+</div>

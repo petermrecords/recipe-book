@@ -45,7 +45,7 @@ $(document).ready(function() {
 		$("#modal-anchor").html("");
 	});
 
-	$("#admin-body").on("click",".admin-recipe-row", function(event) {
+	$("body").on("click",".clickable-row", function(event) {
 		window.location.href = $(this).find("a").attr("href");
 	});
 

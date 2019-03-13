@@ -1,0 +1,11 @@
+<tr class='row clickable-row'>
+	<td class='col-4'><%= link_to admin.full_name, edit_admin_path(admin), class: 'link-unstyled' %></td>
+	<% if admin.discarded? %>
+		<td class='col-2 text-center text-danger'><%= icon('fas', 'times-circle') %></td>
+	<% else %>
+		<td class='col-2 text-center text-success'><%= icon('fas', 'check-circle')%></td>
+	<% end %>
+	<td class='col-2'><%= admin.created_at.strftime("%-m-%-d-%Y")%></td>
+	<td class='col-2 text-center'><%= admin.recipes.unpublished.count %></td>
+	<td class='col-2 text-center'><%= admin.recipes.published.count %></td>
+</tr>

@@ -1,4 +1,4 @@
-<tr class='row admin-recipe-row'>
+<tr class='row clickable-row'>
   <td class='col-4'><%= link_to recipe.dish_name, edit_recipe_path(recipe), class: 'link-unstyled' %></td>
   <% if recipe.published? %>
     <td class='col-2 text-center text-success'><%= icon('fas','check-circle') %></td>

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :admins, only: [:new, :create, :edit, :update, :destroy]
+  resources :admins, except: [:show]
 
   scope :admin do
   	get '/login/', to: 'sessions#new'
@@ -10,11 +10,11 @@ Rails.application.routes.draw do
     put '/recipes/:id/publish', to: 'recipes#publish', as: 'recipe_publish'
     patch '/recipes/:id/publish', to: 'recipes#publish'
     get 'recipes/:id/preview', to: 'recipes#preview', as: 'recipe_preview'
-  	resources :recipes, only: [:new, :create, :edit, :update, :destroy] do
-      resources :ingredients, only: [:new, :create, :edit, :update, :destroy]
-      resources :steps, only: [:new, :create, :edit, :update, :destroy]
+  	resources :recipes, except: [:index, :show] do
+      resources :ingredients, except: [:index, :show]
+      resources :steps, except: [:index, :show]
     end
-    resources :groceries, only: [:new, :create, :edit, :update, :destroy]
+    resources :groceries, except: [:index, :show]
     get '/', to: 'recipes#admin', as: 'admin_root'
   end
 
