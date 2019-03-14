@@ -59,4 +59,26 @@ $(document).ready(function() {
 			$(this).addClass("disabled");
 		}
 	});
+
+	$("body").on("click",".collapse-button", function(event) {
+		if ($(this).hasClass("open")) {
+			$(this).css({"transform": "rotate(0deg)"});
+			$(this).removeClass("open");
+		} else {
+			$(this).css({"transform": "rotate(180deg)"});
+			$(this).addClass("open");
+		}
+		$(this).blur();
+	});
+
+	$("body").on("click","#head-collapse-button", function(event) {
+		if ($(this).hasClass("collapsed")) {
+			$(".head-collapse-content").removeClass("hidden");
+			$(this).removeClass("collapsed");
+		} else {
+			$(".head-collapse-content").addClass("hidden");
+			$(this).addClass("collapsed");
+		}
+		$(this).blur();
+	});
 });

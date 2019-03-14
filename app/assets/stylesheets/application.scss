@@ -247,3 +247,11 @@ button.font-cursive {
 #recipe-directions {
 	border-left: 1px dotted $teal;
 }
+
+#recipe-title {
+	width: 100%;
+}
+
+.head-collapse-content.hidden {
+	display: none;
+}
