@@ -1,7 +1,7 @@
 <div class='row head-row' id='recipe-head'>
   <div class='col-4'>
     <div id='recipe-image' class='head-collapse-content'>
-      <%= image_tag 'placeholder.jpg', class: 'img-fluid' %>
+      <%= image_tag url_for(@recipe.photo), class: 'img-fluid', alt: 'placeholder.jpg' %>
     </div>
   </div>
   <div class='col-8'>

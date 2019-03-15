@@ -6,12 +6,15 @@ class Recipe < ApplicationRecord
 	has_many :ingredients, dependent: :destroy
 	has_many :groceries, through: :ingredients
 	has_many :steps, dependent: :destroy
+	# image support
+	has_one_attached :photo
 	# validations
 	validates :dish_name, { presence: { message: 'cannot be blank' } , uniqueness: true }
 	validates :author, presence: { message: 'cannot be blank' }
 	validates :serves, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 12, message: 'must be a number between 1 and 12' }
 	validates :dish_role, inclusion: { in: self::RECIPE_ROLES , message: 'must be assigned a recognized role' }
-
+	validates :photo, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+	# publication validations
 	validates :ingredients, presence: { message: 'must have at least one ingredient', on: :publish }
 	validates :steps, presence: { message: 'must have at least one step in its directions', on: :publish }
 	# scopes
