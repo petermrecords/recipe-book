@@ -13,7 +13,7 @@ class Recipe < ApplicationRecord
 	validates :author, presence: { message: 'cannot be blank' }
 	validates :serves, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 12, message: 'must be a number between 1 and 12' }
 	validates :dish_role, inclusion: { in: self::RECIPE_ROLES , message: 'must be assigned a recognized role' }
-	validates :photo, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+	validates :photo, content_type: { in: ['image/png', 'image/jpg', 'image/jpeg'], message: 'must be a .png, .jpg or .jpeg file' }
 	# publication validations
 	validates :ingredients, presence: { message: 'must have at least one ingredient', on: :publish }
 	validates :steps, presence: { message: 'must have at least one step in its directions', on: :publish }
@@ -84,7 +84,7 @@ class Recipe < ApplicationRecord
 		steps.order(step_order: :asc, updated_at: :desc).each do |step|
 			index_counter += 1 if step.step_order == added_index
 			if step.step_order != index_counter
-				step.update_attribute(step_order: index_counter)
+				step.update_attribute(:step_order, index_counter)
 			end
 			index_counter += 1
 		end

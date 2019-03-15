@@ -81,4 +81,9 @@ $(document).ready(function() {
 		}
 		$(this).blur();
 	});
+
+	$("body").on("change",".custom-file-input", function(event)  {
+		var fileName = $(this).val().split("\\").pop();
+		$(this).parent().find("label").html(fileName);
+	});
 });

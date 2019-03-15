@@ -63,6 +63,6 @@ class Step < ApplicationRecord
   end
 
   after_save do |step|
-    recipe.update_attribute(updated_at: DateTime.now)
+    recipe.update_attribute(:updated_at, DateTime.now)
   end
 end

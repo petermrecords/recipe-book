@@ -14,12 +14,12 @@ class StepsController < ApplicationController
 	end
 
 	def create
-		@recipe = Recipe.includes(:steps).find(params[:recipe_id])
 		@step = Step.new(step_params)
 		@step.prep_time = parse_prep_time(params[:step][:prep_time_value], params[:step][:prep_time_units])
 		@step.is_active = !!params[:step][:is_active]
 		if @step.save
-			@recipe.reindex_steps(@step.step_order)
+			@recipe = Recipe.includes(:steps).find(params[:recipe_id])
+			@recipe.reindex_steps(nil)
 			@step = Step.new
 			respond_to do |format|
 				format.js { render :new }
@@ -44,12 +44,12 @@ class StepsController < ApplicationController
 	end
 
 	def update
-		@recipe = Recipe.includes(:steps).find(params[:recipe_id])
 		@step = Step.find(params[:id])
 		@step.update(step_params)
 		@step.prep_time = parse_prep_time(params[:step][:prep_time_value], params[:step][:prep_time_units])
 		@step.is_active = !!params[:step][:is_active]
 		if @step.save
+			@recipe = Recipe.includes(:steps).find(params[:recipe_id])
 			@recipe.reindex_steps(nil)
 			@step = Step.new
 			respond_to do |format|

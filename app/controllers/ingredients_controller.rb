@@ -21,6 +21,7 @@ class IngredientsController < ApplicationController
 
 	def create
 		@ingredient = Ingredient.new(ingredient_params)
+		debugger
 		if @ingredient.save
 			@recipe = Recipe.includes(:ingredients).find(params[:recipe_id])
 			@grocery_types = Grocery::GROCERY_TYPES

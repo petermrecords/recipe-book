@@ -10,26 +10,26 @@
 			<li class='nav-item'>
 				<%= link_to 'Instructions', new_recipe_step_path(@recipe), remote: true, class: 'nav-link' %>
 			</li>
-			<% if @recipe.steps.any? || @recipe.ingredients.any? %>
+			<% if @recipe.steps.any? && @recipe.ingredients.any? %>
 				<li class='nav-item'>
-					<%= link_to (icon('fas','eye')<< ' Preview'), recipe_preview_path(@recipe), class: 'nav-link text-warning no-disable'%>
+					<%= link_to (icon('fas','eye') << ' Preview'), recipe_preview_path(@recipe), class: 'nav-link text-warning'%>
 				</li>
 				<li class='nav-item'>
-					<%= link_to (icon('fas','check-circle') << ' Publish'), recipe_publish_path(@recipe), method: :put, data: { confirm: 'Are you sure you are ready to publish this?' }, class: 'nav-link no-disable text-success' %>
+					<%= link_to (icon('fas','check-circle') << ' Publish'), recipe_publish_path(@recipe), method: :put, data: { confirm: 'Are you sure you are ready to publish this?' }, class: 'nav-link text-success' %>
 				</li>
 			<% else %>
 				<li class='nav-item'>
-					<%= link_to (icon('fas','eye')<< ' Preview'), recipe_preview_path(@recipe), class: 'nav-link disabled' %>
+					<%= link_to (icon('fas','eye') << ' Preview'), recipe_preview_path(@recipe), class: 'nav-link disabled' %>
 				</li>
 				<li class='nav-item'>
 					<%= link_to (icon('fas','check-circle') << ' Publish'), recipe_publish_path(@recipe), method: :put, data: { confirm: 'Are you sure you are ready to publish this?' }, class: 'nav-link disabled' %>
 				</li>
 			<% end %>
 			<li class='nav-item'>
-				<%= link_to (icon('fas','exclamation-circle') << ' Delete'), recipe_path(@recipe), method: :delete, remote: true, data: { confirm: 'Are you sure you want to delete this?' }, class: 'nav-link no-disable text-danger' %>
+				<%= link_to (icon('fas','exclamation-circle') << ' Delete'), recipe_path(@recipe), method: :delete, remote: true, data: { confirm: 'Are you sure you want to delete this?' }, class: 'nav-link text-danger' %>
 			</li>
 			<li class='nav-item'>
-				<%= link_to 'Back', :back, class: 'nav-link no-disable' %>
+				<%= link_to 'Back', :back, class: 'nav-link' %>
 			</li>
 		</ul>
 	</div>

@@ -44,7 +44,7 @@ class Ingredient < ApplicationRecord
 	end
 
 	after_save do |ingredient|
-		recipe.update_attribute(updated_at: DateTime.now)
+		recipe.update_attribute(:updated_at, DateTime.now)
 	end
 
 	# custom validation
